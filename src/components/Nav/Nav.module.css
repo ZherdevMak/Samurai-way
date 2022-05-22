@@ -2,9 +2,10 @@
     grid-area: n;
     background-color: blueviolet;
 }
-.item {
+.item a{
     color: white;
+    text-decoration: none;
 }
-.item.active {
+.item .activeLink {
     color: gold;
 }
