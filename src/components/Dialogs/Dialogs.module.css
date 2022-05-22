@@ -1,7 +1,17 @@
-.content {
-    background-color: greenyellow;
-    grid-area: c;
+.dialogs {
+display: grid;
+    grid-template-columns: 2fr 10fr;
 }
-.item {
-    color: blue;
+.dialogsItems {
+padding: 10px;
 }
+.dialogsItems .active {
+    color: gold;
+}
+.messages {
+ padding: 10px;
+}
+.message {
+
+}
+
