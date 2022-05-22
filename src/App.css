@@ -13,4 +13,8 @@
   grid-auto-columns: 2fr 10fr;
   /*grid-gap: ;*/
 }
+.dialog_content {
+  background-color: darkolivegreen;
+  grid-area: c;
+}
 

@@ -13,10 +13,10 @@ function MyPosts() {
                 <button>Remove</button>
             </article>
         </article>
-        <Post />
-        <Post />
-        <Post />
-        <Post />
+        <Post message = {'Hi, how are you?'} />
+        <Post message = {"It's my first post"}/>
+        <Post message = {''}/>
+        <Post message = {''}/>
     </main>)
 }
 export default MyPosts;
