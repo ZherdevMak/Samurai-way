@@ -3,6 +3,7 @@ import comp from './Post.module.css'
 
 type PostProps = {
     message: string
+    like: number
 }
 function Post(props : PostProps) {
     return (
@@ -10,7 +11,7 @@ function Post(props : PostProps) {
             {props.message}
             <article>
                 <img src='https://image.gala.de/21985322/t/O-/v5/w960/r1.5/-/avatar.jpg'></img>
-                <span>Like</span>
+                <span>{props.like}</span>
             </article>
         </article>
 )
