@@ -6,9 +6,10 @@ let arreyPost = [
     {id: 1, message: 'Hi, how are you?', likesCount: 12},
     {id: 2, message: 'It\'s my first post', likesCount: 10},
     {id: 3, message: 'Hi, how are you?', likesCount: 2},
-    {id: 4, message: 'Hi, how are you?', likesCount: 2},
+    {id: 4, message: 'Hi, how a?', likesCount: 2},
 ]
 function MyPosts() {
+    const posts = arreyPost.map(p => <Post message = {p.message} like={p.likesCount} />)
     return (<div>
         <article className={comp.posts}>
             My posts
@@ -20,11 +21,7 @@ function MyPosts() {
                 <button>Remove</button>
             </article>
         </article>
-        <Post message = {arreyPost[0].message} like={arreyPost[0].likesCount} />
-        <Post message = {arreyPost[1].message} like={arreyPost[1].likesCount} />
-        <Post message = {arreyPost[2].message} like={arreyPost[2].likesCount} />
-        <Post message = {arreyPost[3].message} like={arreyPost[3].likesCount} />
-
+        {posts}
     </div>)
 }
 export default MyPosts;

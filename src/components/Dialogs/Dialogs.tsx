@@ -1,6 +1,7 @@
 import React from "react";
 import comp from './Dialogs.module.css'
 import {NavLink} from "react-router-dom";
+import {v1} from "uuid";
 
 type itemProps = {
     'name': string;
@@ -23,6 +24,7 @@ function Message(props: messageProps) {
         <div className={comp.message}>{props.message}</div>
     )
 }
+
 let arreyDialogs = [
     {name: 'Dimych', id: 1},
     {name: 'Andrey', id: 2},
@@ -31,30 +33,38 @@ let arreyDialogs = [
     {name: 'Sasha', id: 5},
 ]
 let arreyMessages = [
-    {message: 'Hi', id: 1 },
-    {message: 'Hello', id: 2 },
-    {message: 'Yo', id: 3 },
-    {message: 'How are you?', id: 4 },
+    {message: 'Hi', id: 1},
+    {message: 'Hello', id: 2},
+    {message: 'Yo', id: 3},
+    {message: 'How are you?', id: 4},
 ]
 
 function Dialogs() {
+    const dialogs = arreyDialogs.map((d) => {
+        return (
+            <div key={v1()}>
+                <div><Item name={d.name} id={d.id}/></div>
+            </div>
+        )
+    })
+    const messages = arreyMessages.map((m) => {
+        return (
+            <div key={v1()}>
+                <div><Message message={m.message}/></div>
+            </div>
+        )
+    })
     return (<div className={comp.dialogs}>
-        <div className={comp.dialogsItems}>
-            <Item name={arreyDialogs[0].name} id={arreyDialogs[0].id}/>
-            <Item name={arreyDialogs[1].name} id={arreyDialogs[1].id}/>
-            <Item name={arreyDialogs[2].name} id={arreyDialogs[2].id}/>
-            <Item name={arreyDialogs[3].name} id={arreyDialogs[3].id}/>
-            <Item name={arreyDialogs[4].name} id={arreyDialogs[4].id}/>
-        </div>
-        <div className={comp.messages}>
-            <Message message={arreyMessages[0].message}/>
-            <Message message={arreyMessages[1].message}/>
-            <Message message={arreyMessages[2].message}/>
-            <Message message={arreyMessages[3].message}/>
+            <div className={comp.dialogsItems}>
+                {dialogs}
+            </div>
+            <div className={comp.messages}>
+                {messages}
+            </div>
 
         </div>
+    )
 
-    </div>)
 }
 
 export default Dialogs;
