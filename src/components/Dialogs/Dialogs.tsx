@@ -1,7 +1,8 @@
 import React from "react";
 import comp from './Dialogs.module.css'
-import {NavLink} from "react-router-dom";
 import {v1} from "uuid";
+import Item from "./DialogsItem/DialogsItem";
+import Message from "./Message/Message";
 
 type itemProps = {
     'name': string;
@@ -11,19 +12,6 @@ type messageProps = {
     'message': string
 }
 
-function Item(props: itemProps) {
-    return (
-        <div className={comp.item + ' ' + comp.active}>
-            <NavLink to={'/Dialogs/1' + props.id}>{props.name}</NavLink>
-        </div>
-    )
-}
-
-function Message(props: messageProps) {
-    return (
-        <div className={comp.message}>{props.message}</div>
-    )
-}
 
 let arreyDialogs = [
     {name: 'Dimych', id: 1},
