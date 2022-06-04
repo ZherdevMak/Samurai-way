@@ -7,9 +7,7 @@ type itemProps = {
     'name': string;
     'id': number;
 }
-type messageProps = {
-    'message': string
-}
+
 
 function Item(props: itemProps) {
     return (
