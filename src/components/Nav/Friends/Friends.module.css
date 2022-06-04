@@ -1,0 +1,31 @@
+.nav {
+    grid-area: n;
+    background-color: blueviolet;
+}
+.item a{
+    color: white;
+    text-decoration: none;
+}
+.item .activeLink {
+    color: gold;
+}
+.title { align-content: center;
+    margin-left: 60px;
+    margin-right: 0;
+    color: gold;
+}
+.friendsAvatar {
+    width: 50px;
+    border-radius: 50%;
+}
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+.friendsName {
+    color: white;
+}
+/*.mainWrapper {*/
+/*    display: inline;*/
+/*    align-content: center;*/
+/*}*/
