@@ -1,8 +1,3 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import {state} from "./State";
 
 let arreyDialogs = [
     {name: 'Dimych', id: 1},
@@ -23,5 +18,18 @@ let arreyPost = [
     {id: 3, message: 'Hi, how are you?', likesCount: 2},
     {id: 4, message: 'Hi, how a?', likesCount: 2},
 ]
-
-ReactDOM.render(<App dialogs = {state.dialogs.dialogs} messages = {state.dialogs.messages} friends={state.sidebar} post = {state.profile.posts} />, document.getElementById('root'));
+let friends = [
+    {id: 1, name: 'Sasha', avatar: 'https://www.animeoutline.com/wp-content/uploads/2018/06/anime_cat_drawing.png'},
+    {id: 2, name: 'Masha', avatar: 'https://www.animeoutline.com/wp-content/uploads/2018/06/anime_cat_drawing.png'},
+    {id: 3, name: 'Luba', avatar: 'https://www.animeoutline.com/wp-content/uploads/2018/06/anime_cat_drawing.png'},
+]
+export let state = {
+    dialogs: {
+        dialogs: arreyDialogs,
+        messages: arreyMessages
+    },
+    profile: {
+        posts: arreyPost
+    },
+    sidebar: friends
+}

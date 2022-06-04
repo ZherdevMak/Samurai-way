@@ -5,10 +5,7 @@ import {DataDialogType} from "../../../App";
 
 
 function MyPosts(props: DataDialogType) {
-    debugger
-
-
-    const posts = props.post.map((p) =>  <Post message = {p.message} likesCount = {p.likesCount} id={p.id} />)
+    const posts = props.post?.map((p) =>  <Post message = {p.message} likesCount = {p.likesCount} id={p.id} />)
     return (<div>
         <article className={comp.posts}>
             My posts

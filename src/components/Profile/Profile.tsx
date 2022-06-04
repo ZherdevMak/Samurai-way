@@ -9,7 +9,7 @@ function Profile(props: DataDialogType) {
     return (
         <main className={comp.content}>
             <ProfileInfo />
-            <MyPosts post ={props.post} />
+            <MyPosts post ={props.post} friends={props.friends}/>
         </main>)
 }
 export default Profile;
