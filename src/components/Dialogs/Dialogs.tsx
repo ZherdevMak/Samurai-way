@@ -15,16 +15,22 @@ export type messageProps = {
 
 
 function Dialogs(props: DataDialogType) {
-    // @ts-ignore
-    const dialogs = props.dialogs.map((d) => {
+    let newText = React.createRef<HTMLTextAreaElement>()
+    const newMessage = () => {
+        let text = newText.current?.value
+        alert(text)
+    }
+
+    const dialogs = props.dialogs?.map((d) => {
         return (
             <div key={v1()}>
                 <div><Item name={d.name} id={d.id}/></div>
             </div>
         )
     })
-    // @ts-ignore
-    const messages = props.messages.map((m) => {
+
+    const addMessage = props.messages?.map((m) => {
+
         return (
             <div key={v1()}>
                 <div><Message message={m.message}/></div>
@@ -36,8 +42,12 @@ function Dialogs(props: DataDialogType) {
                 {dialogs}
             </div>
             <div className={comp.messages}>
-                {messages}
+                {addMessage}
             </div>
+            <div>
+                <textarea ref={newText}></textarea>
+            </div>
+            <button onClick={newMessage}>Add Post</button>
 
         </div>
     )
