@@ -23,7 +23,7 @@ function NavBar(props:DataDialogType) {
         <li className={clAss.item}>
             <NavLink to='/Settings' activeClassName={clAss.activeLink}>Settings</NavLink>
         </li>
-            <Friends friends={props.friends} />
+            <Friends friends={props.friends} addPost={props.addPost} />
     </div>
 )}
 

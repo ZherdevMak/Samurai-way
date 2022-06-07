@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import {state} from "./State";
-
+import {addPost} from "./State";
 let arreyDialogs = [
     {name: 'Dimych', id: 1},
     {name: 'Andrey', id: 2},
@@ -24,4 +24,4 @@ let arreyPost = [
     {id: 4, message: 'Hi, how a?', likesCount: 2},
 ]
 
-ReactDOM.render(<App dialogs = {state.dialogs.dialogs} messages = {state.dialogs.messages} friends={state.sidebar} post = {state.profile.posts} />, document.getElementById('root'));
+ReactDOM.render(<App dialogs = {state.dialogs.dialogs} messages = {state.dialogs.messages} friends={state.sidebar} post = {state.profile.posts} addPost={addPost} />, document.getElementById('root'));

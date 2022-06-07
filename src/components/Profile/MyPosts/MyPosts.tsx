@@ -8,7 +8,7 @@ function MyPosts(props: DataDialogType) {
     let newPostElement = React.createRef<HTMLTextAreaElement>()
     const addPost = () => {
         let text = newPostElement.current?.value
-        alert(text)
+        props.addPost(text)
     }
     const posts = props.post?.map((p) => <Post message={p.message} likesCount={p.likesCount} id={p.id}/>)
 

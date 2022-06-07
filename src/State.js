@@ -1,4 +1,3 @@
-
 let arreyDialogs = [
     {name: 'Dimych', id: 1},
     {name: 'Andrey', id: 2},
@@ -32,4 +31,12 @@ export let state = {
         posts: arreyPost
     },
     sidebar: friends
+}
+export const addPost = (postText) => {
+    let newPost = {
+        id: 5,
+        message: postText,
+        likesCount: 0
+    }
+    state.profile.posts.push(newPost)
 }
