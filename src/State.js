@@ -1,3 +1,5 @@
+import {renderEntireTree} from "./render";
+
 let arreyDialogs = [
     {name: 'Dimych', id: 1},
     {name: 'Andrey', id: 2},
@@ -39,4 +41,5 @@ export const addPost = (postText) => {
         likesCount: 0
     }
     state.profile.posts.push(newPost)
+    renderEntireTree(state)
 }

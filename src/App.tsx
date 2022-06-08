@@ -20,7 +20,7 @@ export type DataDialogType = {
     messages?: messageProps[]
     post?: PostProps[]
     friends?: FriendsType[]
-    addPost: (text:string | undefined) => void
+    addPost: (text:string | null |undefined) => void
 }
 
 
