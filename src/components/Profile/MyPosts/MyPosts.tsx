@@ -4,15 +4,17 @@ import Post from "./Post/Post";
 import {DataDialogType} from "../../../App";
 
 
-
 function MyPosts(props: DataDialogType) {
     let newPostElement = React.createRef<HTMLTextAreaElement>()
-
+    let empty = ""
+    const clearText = () => {
+        if (newPostElement.current)
+            newPostElement.current.value = empty
+    }
     const addPost = () => {
         let text = newPostElement.current?.value
         props.addPost(text)
-        // @ts-ignore
-        newPostElement.current.value = ''
+        clearText()
     }
     const posts = props.post?.map((p) => <Post message={p.message} likesCount={p.likesCount} id={p.id}/>)
 
@@ -21,7 +23,7 @@ function MyPosts(props: DataDialogType) {
             My posts
             <article>
                 <div>
-                    <textarea  ref={newPostElement}></textarea>
+                    <textarea ref={newPostElement}></textarea>
                 </div>
                 <button onClick={addPost}>Add Post</button>
                 <button>Remove</button>
