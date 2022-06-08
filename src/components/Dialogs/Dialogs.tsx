@@ -3,7 +3,8 @@ import comp from './Dialogs.module.css'
 import {v1} from "uuid";
 import Item from "./DialogsItem/DialogsItem";
 import Message from "./Message/Message";
-import {DataDialogType} from "../../App";
+import {PostProps} from "../Profile/MyPosts/Post/Post";
+import {FriendsType} from "../Nav/Friends/Friends";
 
 export type itemProps = {
     'name': string;
@@ -12,9 +13,14 @@ export type itemProps = {
 export type messageProps = {
     'message': string
 }
+type DialogsType = {
+    dialogs?: itemProps[]
+    messages?: messageProps[]
+    post?: PostProps[]
+    friends?: FriendsType[]
+}
 
-
-function Dialogs(props: DataDialogType) {
+function Dialogs(props: DialogsType) {
     let newText = React.createRef<HTMLTextAreaElement>()
     const newMessage = () => {
         let text = newText.current?.value
