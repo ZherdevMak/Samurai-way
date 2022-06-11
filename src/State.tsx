@@ -1,13 +1,15 @@
-import {renderEntireTree} from "./render";
-type ArreyDialogsType = {
+ let renderEntireTree = () => {
+
+}
+export type ArreyDialogsType = {
     name: string,
     id: number
 }
-type ArreyMessagesType = {
+export type ArreyMessagesType = {
     message: string,
     id: number
 }
-type ArreyPostType = {
+ export type ArreyPostType = {
     id: number,
     message: string,
     likesCount: number
@@ -16,7 +18,7 @@ type ArreyPostType = {
 // type NewPostType = {
 //     newPostValue: string
 // }
-type FriendsType = {
+ export type FriendsType = {
     id: number,
     name: string,
     avatar: string
@@ -77,10 +79,13 @@ export const addPost = () => {
     }
     state.profile.posts.push(newPost)
     state.profile.newPostValue = ''
-    renderEntireTree(state)
+    renderEntireTree()
 }
 export const addNewText = (newText:any) => {
     state.profile.newPostValue = newText
-    renderEntireTree(state)
+    renderEntireTree()
 }
-export default state
+export const subscribe = (observer: ()=>void) => {
+    renderEntireTree = observer
+}
+
