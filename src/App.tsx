@@ -20,9 +20,10 @@ export type DataDialogType = {
     messages?: messageProps[]
     post?: PostProps[]
     friends?: FriendsType[]
-    addPost: (text:string | null |undefined) => void
+    addPost: () => void
+    newPostValue?: string
+    addNewText?: (newText: string | undefined) => void
 }
-
 
 
 function App(props: DataDialogType) {
@@ -30,13 +31,15 @@ function App(props: DataDialogType) {
         <BrowserRouter>
             <div className="app-wrapper">
                 <Header/>
-                <NavBar friends={props.friends} addPost={addPost} />
+                <NavBar friends={props.friends} addPost={addPost}/>
                 <div className="dialog_content">
-                    <Route exact path='/Dialogs' render={() => <Dialogs dialogs={props.dialogs} messages={props.messages} />}/>
-                    <Route path='/Profile' render={() => <Profile post ={props.post} addPost={addPost}/>}/>
-                    <Route path='/News' render={() => <News />}/>
-                    <Route path='/Music' render={() =><Music />}/>
-                    <Route path='/Settings' render={() =><Settings />}/>
+                    <Route exact path='/Dialogs'
+                           render={() => <Dialogs dialogs={props.dialogs} messages={props.messages}/>}/>
+                    <Route path='/Profile' render={() => <Profile newPostValue={props.newPostValue} post={props.post}
+                                                                  addNewText={props.addNewText} addPost={addPost}/>}/>
+                    <Route path='/News' render={() => <News/>}/>
+                    <Route path='/Music' render={() => <Music/>}/>
+                    <Route path='/Settings' render={() => <Settings/>}/>
                 </div>
             </div>
         </BrowserRouter>

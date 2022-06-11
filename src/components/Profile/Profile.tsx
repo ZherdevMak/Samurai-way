@@ -8,8 +8,10 @@ import {DataDialogType} from "../../App";
 function Profile(props: DataDialogType) {
     return (
         <main className={comp.content}>
-            <ProfileInfo />
-            <MyPosts post ={props.post} friends={props.friends} addPost={props.addPost}/>
+            <ProfileInfo/>
+            <MyPosts post={props.post} friends={props.friends} addPost={props.addPost} addNewText={props.addNewText}
+                     newPostValue={props.newPostValue}/>
         </main>)
 }
+
 export default Profile;
