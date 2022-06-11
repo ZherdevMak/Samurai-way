@@ -12,3 +12,4 @@ export let renderEntireTree = ()=> {
 }
 renderEntireTree()
 subscribe(renderEntireTree)
+console.log(state)
