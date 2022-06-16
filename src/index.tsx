@@ -6,9 +6,7 @@ import App from "./App";
 
 
 export let renderEntireTree = () => {
-    ReactDOM.render(<App dialogs={store.getState} newPostValue={store._state.profile.newPostValue}
-                         addNewText={store.addNewText} messages={store._state.dialogs.messages}
-                         friends={store._state.sidebar} post={store._state.profile.posts} addPost={store.addPost}/>,
+    ReactDOM.render(<App state={store.getState()} addNewText={store.addNewText.bind(store)} addPost={store.addPost.bind(store)} />,
         document.getElementById('root'));
 }
 renderEntireTree()

@@ -1,14 +1,14 @@
 import React from 'react';
 import {v1} from "uuid";
-import {DataDialogType} from "../../../App";
 import stl from './Friends.module.css'
+import {NavBarProps} from "../Nav";
 
 export type FriendsType = {
     id: number,
     avatar: string,
     name: string
 }
-const Friends = (props: DataDialogType) => {
+const Friends = (props: NavBarProps) => {
     return (
         <div className={stl.mainWrapper}>
             <h2 className={stl.title}>Friends</h2>
@@ -16,7 +16,7 @@ const Friends = (props: DataDialogType) => {
                 {props.friends?.map((f) => {
                     return (
                         <div key={v1()}>
-                            <img className={stl.friendsAvatar} src={f.avatar}/>
+                            <img className={stl.friendsAvatar} src={f.avatar} alt = "avatar"/>
                             <div className={stl.friendsName}>{f.name}</div>
                         </div>
                     )

@@ -2,18 +2,13 @@ import React from "react";
 import clAss from './Nav.module.css'
 import {NavLink} from "react-router-dom";
 import Friends, {FriendsType} from "./Friends/Friends";
-import {DataDialogType} from "../../App";
-import {itemProps, messageProps} from "../Dialogs/Dialogs";
-import {PostProps} from "../Profile/MyPosts/Post/Post";
-type NavBarProps = {
-    dialogs?: itemProps[]
-    messages?: messageProps[]
-    post?: PostProps[]
+export type NavBarProps = {
+
     friends?: FriendsType[]
     addPost: (text:string | null |undefined) => void
 }
 
-function NavBar(props:DataDialogType) {
+function NavBar(props:NavBarProps) {
     return(
         <div className={clAss.nav}>
         <li className={clAss.item}>

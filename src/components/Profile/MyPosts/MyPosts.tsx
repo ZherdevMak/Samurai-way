@@ -1,17 +1,13 @@
 import React from "react";
 import comp from './MyPosts.module.css'
 import Post from "./Post/Post";
-import {DataDialogType} from "../../../App";
 import {v1} from "uuid";
+import {ProfileType} from "../Profile";
 
 
-function MyPosts(props: DataDialogType) {
+function MyPosts(props: ProfileType) {
     let newPostElement = React.createRef<HTMLTextAreaElement>()
-    let empty = ""
-    const clearText = () => {
-        if (newPostElement.current)
-            newPostElement.current.value = empty
-    }
+
     const addPost = () => {
 
         props.addPost()

@@ -91,7 +91,7 @@ export let store:StoreType = {
     addPost() {
         let newPost: ArreyPostType = {
             id: 5,
-            message: this._state.profile.newPostValue,
+            message: store._state.profile.newPostValue,
             likesCount: 0
         }
         this._state.profile.posts.push(newPost)
@@ -99,6 +99,7 @@ export let store:StoreType = {
         this.renderEntireTree()
     },
     addNewText(newText: any)  {
+        console.log((newText))
         this._state.profile.newPostValue = newText
         this.renderEntireTree()
     },

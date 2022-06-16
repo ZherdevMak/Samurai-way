@@ -5,7 +5,7 @@ import Item from "./DialogsItem/DialogsItem";
 import Message from "./Message/Message";
 import {PostProps} from "../Profile/MyPosts/Post/Post";
 import {FriendsType} from "../Nav/Friends/Friends";
-import {StateType} from "../../State";
+import {ArreyDialogsType} from "../../State";
 
 export type itemProps = {
     'name': string;
@@ -15,7 +15,7 @@ export type messageProps = {
     'message': string
 }
 type DialogsType = {
-    dialogs?:() => StateType
+    dialogs?:ArreyDialogsType[]
     messages?: messageProps[]
     post?: PostProps[]
     friends?: FriendsType[]
