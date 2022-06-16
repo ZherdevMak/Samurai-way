@@ -13,10 +13,10 @@ import Settings from "./components/Settings/Settings";
 import {messageProps} from "./components/Dialogs/Dialogs";
 import {PostProps} from "./components/Profile/MyPosts/Post/Post";
 import {FriendsType} from "./components/Nav/Friends/Friends";
-import {addPost} from "./State";
+import {StateType, store} from "./State";
 
 export type DataDialogType = {
-    dialogs?: itemProps[]
+    dialogs?: () => StateType
     messages?: messageProps[]
     post?: PostProps[]
     friends?: FriendsType[]
@@ -31,12 +31,12 @@ function App(props: DataDialogType) {
         <BrowserRouter>
             <div className="app-wrapper">
                 <Header/>
-                <NavBar friends={props.friends} addPost={addPost}/>
+                <NavBar friends={props.friends} addPost={store.addPost}/>
                 <div className="dialog_content">
                     <Route exact path='/Dialogs'
                            render={() => <Dialogs dialogs={props.dialogs} messages={props.messages}/>}/>
                     <Route path='/Profile' render={() => <Profile newPostValue={props.newPostValue} post={props.post}
-                                                                  addNewText={props.addNewText} addPost={addPost}/>}/>
+                                                                  addNewText={props.addNewText} addPost={store.addPost}/>}/>
                     <Route path='/News' render={() => <News/>}/>
                     <Route path='/Music' render={() => <Music/>}/>
                     <Route path='/Settings' render={() => <Settings/>}/>
