@@ -8,13 +8,12 @@ import {BrowserRouter, Route} from "react-router-dom";
 import Dialogs from "./components/Dialogs/Dialogs";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
-import {StateType} from "./State";
+import {AddNewText, AddPostType, StateType} from "./State";
 
 
 export type AppPropsType = {
     state: StateType
-    addNewText:(newText: any) => void
-    addPost:() => void
+    dispatch: (action:AddPostType | AddNewText) => void
 }
 
 
@@ -25,12 +24,12 @@ function App(props: AppPropsType) {
         <BrowserRouter>
             <div className="app-wrapper">
                 <Header/>
-                <NavBar friends={state.sidebar} addPost={props.addPost}/>
+                <NavBar friends={state.sidebar} dispatch={props.dispatch}/>
                 <div className="dialog_content">
                     <Route exact path='/Dialogs'
                            render={() => <Dialogs dialogs={state.dialogs.dialogs} messages={state.dialogs.messages}/>}/>
                     <Route path='/Profile' render={() => <Profile newPostValue={state.profile.newPostValue} post={state.profile.posts}
-                                                                  addNewText={props.addNewText} addPost={props.addPost}/>}/>
+                                                                  dispatch={props.dispatch}/>}/>
                     <Route path='/News' render={() => <News/>}/>
                     <Route path='/Music' render={() => <Music/>}/>
                     <Route path='/Settings' render={() => <Settings/>}/>

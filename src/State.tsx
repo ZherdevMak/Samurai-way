@@ -30,15 +30,21 @@ export type StateType = {
     sidebar: FriendsType[]
 }
 export type StoreType = {
-    _state:StateType
-    getState:()=>StateType
-    renderEntireTree: ()=>void
-    addPost: ()=>void
-    addNewText:(newText:any)=>void
-    subscribe:(observer: () => void)=>void
+    _state: StateType
+    getState: () => StateType
+    renderEntireTree: () => void
+    subscribe: (observer: () => void) => void
+    dispatch: (action:AddPostType | AddNewText) => void
+}
+export type AddPostType = {
+    type:'ADD-POST'
+}
+export type AddNewText = {
+    type:'ADD-NEW-TEXT'
+    newText: string
 }
 
-export let store:StoreType = {
+export let store: StoreType = {
     _state: {
         dialogs: {
             dialogs: [
@@ -86,33 +92,27 @@ export let store:StoreType = {
         return this._state
     },
     renderEntireTree() {
-
-    },
-    addPost() {
-        let newPost: ArreyPostType = {
-            id: 5,
-            message: store._state.profile.newPostValue,
-            likesCount: 0
-        }
-        this._state.profile.posts.push(newPost)
-        this._state.profile.newPostValue = ''
-        this.renderEntireTree()
-    },
-    addNewText(newText: any)  {
-        console.log((newText))
-        this._state.profile.newPostValue = newText
-        this.renderEntireTree()
     },
     subscribe(observer) {
         this.renderEntireTree = observer
+    },
+
+    dispatch(action) {
+        if (action.type === 'ADD-POST') {
+            let newPost: ArreyPostType = {
+                id: 5,
+                message: store._state.profile.newPostValue,
+                likesCount: 0
+            }
+            this._state.profile.posts.push(newPost)
+            this._state.profile.newPostValue = ''
+            this.renderEntireTree()
+        } else if (action.type === 'ADD-NEW-TEXT') {
+            this._state.profile.newPostValue = action.newText
+            this.renderEntireTree()
+        }
     }
 }
-
-
-
-
-
-
 
 
 // let arreyDialogs:ArreyDialogsType[] = [

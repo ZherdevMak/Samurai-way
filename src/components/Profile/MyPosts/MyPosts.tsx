@@ -10,14 +10,15 @@ function MyPosts(props: ProfileType) {
 
     const addPost = () => {
 
-        props.addPost()
+        props.dispatch({type:'ADD-POST'})
 
     }
     const posts = props.post?.map((p) => <Post key={v1()} message={p.message} likesCount={p.likesCount} id={p.id}/>)
 
     const newPostOnChange = () => {
-        let text = newPostElement.current?.value
-        props.addNewText && props.addNewText(text)
+        if (newPostElement.current!==null){
+        let text = newPostElement.current.value
+        props.dispatch({type:'ADD-NEW-TEXT', newText:text})}
     }
     return (<div>
         <article className={comp.posts}>

@@ -2,11 +2,10 @@ import React from "react";
 import comp from './Profile.module.css'
 import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo";
-import {ArreyPostType} from "../../State";
+import {AddNewText, AddPostType, ArreyPostType} from "../../State";
 export type ProfileType ={
     post:ArreyPostType[]
-    addPost:() => void
-    addNewText:(newText: any) => void
+    dispatch: (action:AddPostType | AddNewText) => void
     newPostValue:string
 
 }
@@ -15,7 +14,7 @@ function Profile(props: ProfileType) {
     return (
         <main className={comp.content}>
             <ProfileInfo/>
-            <MyPosts post={props.post}  addPost={props.addPost} addNewText={props.addNewText}
+            <MyPosts post={props.post} dispatch={props.dispatch}
                      newPostValue={props.newPostValue}/>
         </main>)
 }

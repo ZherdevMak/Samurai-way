@@ -2,10 +2,11 @@ import React from "react";
 import clAss from './Nav.module.css'
 import {NavLink} from "react-router-dom";
 import Friends, {FriendsType} from "./Friends/Friends";
+import {AddNewText, AddPostType} from "../../State";
 export type NavBarProps = {
 
     friends?: FriendsType[]
-    addPost: (text:string | null |undefined) => void
+    dispatch: (action:AddPostType | AddNewText) => void
 }
 
 function NavBar(props:NavBarProps) {
@@ -26,7 +27,7 @@ function NavBar(props:NavBarProps) {
         <li className={clAss.item}>
             <NavLink to='/Settings' activeClassName={clAss.activeLink}>Settings</NavLink>
         </li>
-            <Friends friends={props.friends} addPost={props.addPost} />
+            <Friends friends={props.friends} dispatch={props.dispatch} />
     </div>
 )}
 
