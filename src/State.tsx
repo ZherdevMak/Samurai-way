@@ -1,10 +1,12 @@
+import {v1} from "uuid";
+
 export type ArreyDialogsType = {
     name: string,
     id: number
 }
 export type ArreyMessagesType = {
     message: string,
-    id: number
+    id: string
 }
 export type ArreyPostType = {
     id: number,
@@ -21,7 +23,8 @@ export type FriendsType = {
 export type StateType = {
     dialogs: {
         dialogs: ArreyDialogsType[],
-        messages: ArreyMessagesType[]
+        messages: ArreyMessagesType[],
+        newMessageValue:string
     },
     profile: {
         posts: ArreyPostType[],
@@ -34,7 +37,7 @@ export type StoreType = {
     getState: () => StateType
     renderEntireTree: () => void
     subscribe: (observer: () => void) => void
-    dispatch: (action: AddPostType | AddNewText) => void
+    dispatch: (action:any) => void
 }
 export type AddPostType = {
     type: 'ADD-POST'
@@ -42,6 +45,9 @@ export type AddPostType = {
 export type AddNewText = {
     type: 'ADD-NEW-TEXT'
     newText: string
+}
+export type AddMessageType = {
+    type: 'ADD-MESSAGE'
 }
 export const addPostActionCreator = () => {
 
@@ -53,6 +59,17 @@ export const addNewTextActionCreator = (text: string) => {
     return {
         type: 'ADD-NEW-TEXT',
         newText: text
+    }
+}
+export const addNewMessageCreator = () => {
+    return {
+        type:'ADD-MESSAGE'
+    }
+}
+export const addNewMessageTextActionCreator = (messageText:string) => {
+    return {
+        type: 'ADD-NEW-MESSAGE-TEXT',
+        newMessageValue: messageText
     }
 }
 
@@ -67,11 +84,12 @@ export let store: StoreType = {
                 {name: 'Sasha', id: 5},
             ],
             messages: [
-                {message: 'Hi', id: 1},
-                {message: 'Hello', id: 2},
-                {message: 'Yo', id: 3},
-                {message: 'How are you?', id: 4},
-            ]
+                {message: 'Hi', id: v1()},
+                {message: 'Hello', id: v1()},
+                {message: 'Yo', id: v1()},
+                {message: 'How are you?', id: v1()},
+            ],
+            newMessageValue: ""
         },
         profile: {
             posts: [
@@ -122,6 +140,18 @@ export let store: StoreType = {
             this.renderEntireTree()
         } else if (action.type === 'ADD-NEW-TEXT') {
             this._state.profile.newPostValue = action.newText
+            this.renderEntireTree()
+        } else if (action.type === 'ADD-MESSAGE') {
+            let newMessage: ArreyMessagesType = {
+                id: v1(),
+                message: store._state.dialogs.newMessageValue,
+            }
+            this._state.dialogs.messages.push(newMessage)
+            this._state.dialogs.newMessageValue = ''
+            this.renderEntireTree()
+        }
+        else if (action.type === 'ADD-NEW-MESSAGE-TEXT') {
+            this._state.dialogs.newMessageValue = action.newMessageValue
             this.renderEntireTree()
         }
     }

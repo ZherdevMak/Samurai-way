@@ -3,9 +3,11 @@ import comp from './Dialogs.module.css'
 import {v1} from "uuid";
 import Item from "./DialogsItem/DialogsItem";
 import Message from "./Message/Message";
-import {PostProps} from "../Profile/MyPosts/Post/Post";
-import {FriendsType} from "../Nav/Friends/Friends";
-import {ArreyDialogsType} from "../../State";
+import {
+    addNewMessageCreator,
+    addNewMessageTextActionCreator,
+    ArreyDialogsType
+} from "../../State";
 
 export type itemProps = {
     'name': string;
@@ -14,19 +16,29 @@ export type itemProps = {
 export type messageProps = {
     'message': string
 }
-type DialogsType = {
-    dialogs?:ArreyDialogsType[]
+export type DialogsType = {
+    dialogs?: ArreyDialogsType[]
     messages?: messageProps[]
-    post?: PostProps[]
-    friends?: FriendsType[]
+    dispatch: (action:any) => void
+    newMessageValue:string
 }
 
-function Dialogs(props: DialogsType) {
+export function Dialogs(props:DialogsType) {
     let newText = React.createRef<HTMLTextAreaElement>()
-    const newMessage = () => {
-        let text = newText.current?.value
-        alert(text)
+
+   const newPostOnChange = () => {
+       if (newText.current!==null){
+           let text = newText.current.value
+           props.dispatch(addNewMessageTextActionCreator(text))}
+   }
+    const addPost = () => {
+        props.dispatch(addNewMessageCreator())
     }
+    // const newMessage = () => {
+    //     let text = newText.current?.value
+    //     alert(text)
+    // }
+
 
     const dialogs = props.dialogs?.map((d) => {
         return (
@@ -48,17 +60,17 @@ function Dialogs(props: DialogsType) {
             <div className={comp.dialogsItems}>
                 {dialogs}
             </div>
-            <div className={comp.messages}>
-                {addMessage}
-            </div>
             <div>
-                <textarea ref={newText}></textarea>
+                <div className={comp.messages}>
+                    {addMessage}
+                </div>
+                <div>
+                    <textarea ref={newText} onChange={newPostOnChange} value={props.newMessageValue}></textarea>
+                </div>
+                <button onClick={addPost}>Add Post</button>
             </div>
-            <button onClick={newMessage}>Add Post</button>
-
         </div>
     )
 
 }
 
-export default Dialogs;

@@ -5,7 +5,7 @@ import NavBar from "./components/Nav/Nav";
 import Profile from "./components/Profile/Profile";
 import Music from "./components/Music/Music";
 import {BrowserRouter, Route} from "react-router-dom";
-import Dialogs from "./components/Dialogs/Dialogs";
+import {Dialogs} from "./components/Dialogs/Dialogs";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
 import {StateType} from "./State";
@@ -27,7 +27,9 @@ function App(props: AppPropsType) {
                 <NavBar friends={state.sidebar} dispatch={props.dispatch}/>
                 <div className="dialog_content">
                     <Route exact path='/Dialogs'
-                           render={() => <Dialogs dialogs={state.dialogs.dialogs} messages={state.dialogs.messages}/>}/>
+                           render={() => <Dialogs dialogs={state.dialogs.dialogs} messages={state.dialogs.messages} dispatch={props.dispatch}
+                                                  newMessageValue={state.dialogs.newMessageValue}/>}/>
+
                     <Route path='/Profile' render={() => <Profile newPostValue={state.profile.newPostValue} post={state.profile.posts}
                                                                   dispatch={props.dispatch}/>}/>
                     <Route path='/News' render={() => <News/>}/>
