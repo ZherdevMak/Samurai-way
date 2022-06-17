@@ -2,10 +2,10 @@ import React from "react";
 import comp from './Profile.module.css'
 import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo";
-import {AddNewText, AddPostType, ArreyPostType} from "../../State";
+import {ArreyPostType} from "../../State";
 export type ProfileType ={
     post:ArreyPostType[]
-    dispatch: (action:AddPostType | AddNewText) => void
+    dispatch: (action:any) => void
     newPostValue:string
 
 }

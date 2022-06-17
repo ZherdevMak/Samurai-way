@@ -8,12 +8,12 @@ import {BrowserRouter, Route} from "react-router-dom";
 import Dialogs from "./components/Dialogs/Dialogs";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
-import {AddNewText, AddPostType, StateType} from "./State";
+import {StateType} from "./State";
 
 
 export type AppPropsType = {
     state: StateType
-    dispatch: (action:AddPostType | AddNewText) => void
+    dispatch: (action:any) => void
 }
 
 

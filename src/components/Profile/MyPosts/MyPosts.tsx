@@ -3,6 +3,7 @@ import comp from './MyPosts.module.css'
 import Post from "./Post/Post";
 import {v1} from "uuid";
 import {ProfileType} from "../Profile";
+import {addNewTextActionCreator, addPostActionCreator} from "../../../State";
 
 
 function MyPosts(props: ProfileType) {
@@ -10,7 +11,7 @@ function MyPosts(props: ProfileType) {
 
     const addPost = () => {
 
-        props.dispatch({type:'ADD-POST'})
+        props.dispatch(addPostActionCreator())
 
     }
     const posts = props.post?.map((p) => <Post key={v1()} message={p.message} likesCount={p.likesCount} id={p.id}/>)
@@ -18,7 +19,7 @@ function MyPosts(props: ProfileType) {
     const newPostOnChange = () => {
         if (newPostElement.current!==null){
         let text = newPostElement.current.value
-        props.dispatch({type:'ADD-NEW-TEXT', newText:text})}
+        props.dispatch(addNewTextActionCreator(text))}
     }
     return (<div>
         <article className={comp.posts}>
@@ -34,5 +35,5 @@ function MyPosts(props: ProfileType) {
         {posts}
     </div>)
 }
+export default MyPosts
 
-export default MyPosts;

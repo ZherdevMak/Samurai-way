@@ -2,11 +2,10 @@ import React from "react";
 import clAss from './Nav.module.css'
 import {NavLink} from "react-router-dom";
 import Friends, {FriendsType} from "./Friends/Friends";
-import {AddNewText, AddPostType} from "../../State";
 export type NavBarProps = {
 
     friends?: FriendsType[]
-    dispatch: (action:AddPostType | AddNewText) => void
+    dispatch: (action:()=>void) => void
 }
 
 function NavBar(props:NavBarProps) {
