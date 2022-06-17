@@ -1,6 +1,6 @@
 import React from 'react';
 import './index.css';
-import {store} from "./State";
+import {store} from "./components/Redax/State";
 import ReactDOM from "react-dom";
 import App from "./App";
 

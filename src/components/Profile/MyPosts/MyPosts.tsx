@@ -3,7 +3,8 @@ import comp from './MyPosts.module.css'
 import Post from "./Post/Post";
 import {v1} from "uuid";
 import {ProfileType} from "../Profile";
-import {addNewTextActionCreator, addPostActionCreator} from "../../../State";
+import {addNewTextActionCreator} from "../../Redax/ProfileReduser";
+import {addPostActionCreator} from "../../Redax/ProfileReduser";
 
 
 function MyPosts(props: ProfileType) {

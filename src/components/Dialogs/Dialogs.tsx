@@ -6,8 +6,9 @@ import Message from "./Message/Message";
 import {
     addNewMessageCreator,
     addNewMessageTextActionCreator,
-    ArreyDialogsType
-} from "../../State";
+
+} from "../Redax/DialogsReduser";
+import {ArreyDialogsType} from "../Redax/State";
 
 export type itemProps = {
     'name': string;

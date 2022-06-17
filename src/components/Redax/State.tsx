@@ -1,4 +1,7 @@
 import {v1} from "uuid";
+import ProfileReduser from "./ProfileReduser";
+import DialogsReduser from "./DialogsReduser";
+import SidebarReduser from "./SidebarReduser";
 
 export type ArreyDialogsType = {
     name: string,
@@ -24,7 +27,7 @@ export type StateType = {
     dialogs: {
         dialogs: ArreyDialogsType[],
         messages: ArreyMessagesType[],
-        newMessageValue:string
+        newMessageValue: string
     },
     profile: {
         posts: ArreyPostType[],
@@ -37,8 +40,9 @@ export type StoreType = {
     getState: () => StateType
     renderEntireTree: () => void
     subscribe: (observer: () => void) => void
-    dispatch: (action:any) => void
+    dispatch: (action: any) => void
 }
+export type ActionTypes = AddPostType | AddNewText | AddMessageType | AddMessageTextType
 export type AddPostType = {
     type: 'ADD-POST'
 }
@@ -49,28 +53,9 @@ export type AddNewText = {
 export type AddMessageType = {
     type: 'ADD-MESSAGE'
 }
-export const addPostActionCreator = () => {
-
-  return   {
-        type:'ADD-POST'
-    }
-}
-export const addNewTextActionCreator = (text: string) => {
-    return {
-        type: 'ADD-NEW-TEXT',
-        newText: text
-    }
-}
-export const addNewMessageCreator = () => {
-    return {
-        type:'ADD-MESSAGE'
-    }
-}
-export const addNewMessageTextActionCreator = (messageText:string) => {
-    return {
-        type: 'ADD-NEW-MESSAGE-TEXT',
-        newMessageValue: messageText
-    }
+export type AddMessageTextType = {
+    type: 'ADD-NEW-MESSAGE-TEXT'
+    newMessageValue:string
 }
 
 export let store: StoreType = {
@@ -128,32 +113,10 @@ export let store: StoreType = {
     },
 
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
-
-            let newPost: ArreyPostType = {
-                id: 5,
-                message: store._state.profile.newPostValue,
-                likesCount: 0
-            }
-            this._state.profile.posts.push(newPost)
-            this._state.profile.newPostValue = ''
-            this.renderEntireTree()
-        } else if (action.type === 'ADD-NEW-TEXT') {
-            this._state.profile.newPostValue = action.newText
-            this.renderEntireTree()
-        } else if (action.type === 'ADD-MESSAGE') {
-            let newMessage: ArreyMessagesType = {
-                id: v1(),
-                message: store._state.dialogs.newMessageValue,
-            }
-            this._state.dialogs.messages.push(newMessage)
-            this._state.dialogs.newMessageValue = ''
-            this.renderEntireTree()
-        }
-        else if (action.type === 'ADD-NEW-MESSAGE-TEXT') {
-            this._state.dialogs.newMessageValue = action.newMessageValue
-            this.renderEntireTree()
-        }
+        this._state.profile = ProfileReduser(action, this._state.profile)
+        this._state.dialogs = DialogsReduser(action, this._state.dialogs)
+        this._state.sidebar = SidebarReduser(action, this._state.sidebar)
+        this.renderEntireTree()
     }
 }
 

@@ -8,7 +8,7 @@ import {BrowserRouter, Route} from "react-router-dom";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
-import {StateType} from "./State";
+import {StateType} from "./components/Redax/State";
 
 
 export type AppPropsType = {
