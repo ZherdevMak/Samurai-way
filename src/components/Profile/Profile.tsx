@@ -3,10 +3,9 @@ import comp from './Profile.module.css'
 import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo";
 import {ArreyPostType} from "../Redux/State";
+import MyPostsContainer from "./MyPostsContainer";
 export type ProfileType ={
-    post:ArreyPostType[]
-    dispatch: (action:any) => void
-    newPostValue:string
+    store:any
 
 }
 
@@ -14,8 +13,7 @@ function Profile(props: ProfileType) {
     return (
         <main className={comp.content}>
             <ProfileInfo/>
-            <MyPosts post={props.post} dispatch={props.dispatch}
-                     newPostValue={props.newPostValue}/>
+            <MyPostsContainer store = {props.store}/>
         </main>)
 }
 

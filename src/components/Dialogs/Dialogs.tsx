@@ -24,16 +24,16 @@ export type DialogsType = {
     newMessageValue:string
 }
 
-export function Dialogs(props:DialogsType) {
+export function Dialogs(props:any) {
     let newText = React.createRef<HTMLTextAreaElement>()
 
    const newPostOnChange = () => {
        if (newText.current!==null){
            let text = newText.current.value
-           props.dispatch(addNewMessageTextActionCreator(text))}
+           props.newPostOnChange(text)}
    }
     const addPost = () => {
-        props.dispatch(addNewMessageCreator())
+        props.addPost()
     }
     // const newMessage = () => {
     //     let text = newText.current?.value
@@ -41,7 +41,7 @@ export function Dialogs(props:DialogsType) {
     // }
 
 
-    const dialogs = props.dialogs?.map((d) => {
+    const dialogs = props.dialogs?.map((d: { name: string; id: number; }) => {
         return (
             <div key={v1()}>
                 <div><Item name={d.name} id={d.id}/></div>
@@ -49,7 +49,7 @@ export function Dialogs(props:DialogsType) {
         )
     })
 
-    const addMessage = props.messages?.map((m) => {
+    const addMessage = props.messages.map((m: { message: string; }) => {
 
         return (
             <div key={v1()}>

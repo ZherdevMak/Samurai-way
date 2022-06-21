@@ -9,11 +9,13 @@ import {Dialogs} from "./components/Dialogs/Dialogs";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
 import {StateType} from "./components/Redux/State";
+import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 
 
 export type AppPropsType = {
     state: StateType
-    dispatch: (action:any) => void
+    store:any
+
 }
 
 
@@ -25,14 +27,12 @@ function App(props: AppPropsType) {
         <BrowserRouter>
             <div className="app-wrapper">
                 <Header/>
-                <NavBar friends={state.sidebar} dispatch={props.dispatch}/>
+                <NavBar store={props.store} />
                 <div className="dialog_content">
                     <Route exact path='/Dialogs'
-                           render={() => <Dialogs dialogs={state.dialogs.dialogs} messages={state.dialogs.messages} dispatch={props.dispatch}
-                                                  newMessageValue={state.dialogs.newMessageValue}/>}/>
+                           render={() => <DialogsContainer store={props.store}/>}/>
 
-                    <Route path='/Profile' render={() => <Profile newPostValue={state.profile.newPostValue} post={state.profile.posts}
-                                                                  dispatch={props.dispatch}/>}/>
+                    <Route path='/Profile' render={() => <Profile store={props.store}/>}/>
                     <Route path='/News' render={() => <News/>}/>
                     <Route path='/Music' render={() => <Music/>}/>
                     <Route path='/Settings' render={() => <Settings/>}/>

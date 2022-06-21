@@ -7,21 +7,19 @@ import {addNewTextActionCreator} from "../../Redux/ProfileReduser";
 import {addPostActionCreator} from "../../Redux/ProfileReduser";
 
 
-function MyPosts(props: ProfileType) {
+function MyPosts(props:any) {
     let newPostElement = React.createRef<HTMLTextAreaElement>()
 
     const addPost = () => {
-
-        props.dispatch(addPostActionCreator())
-
+    props.addPost()
     }
-    const posts = props.post?.map((p) => <Post key={v1()} message={p.message} likesCount={p.likesCount} id={p.id}/>)
+    const posts = props.post.map((p: { message: string; likesCount: number; id: number; }) => <Post key={v1()} message={p.message} likesCount={p.likesCount} id={p.id}/>)
 
     const newPostOnChange = () => {
         if (newPostElement.current!==null){
         let text = newPostElement.current.value
-        props.dispatch(addNewTextActionCreator(text))}
-    }
+        props.newPostOnChange(text)
+    }}
     return (<div>
         <article className={comp.posts}>
             My posts
