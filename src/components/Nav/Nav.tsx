@@ -9,6 +9,7 @@ export type NavBarProps = {
 }
 
 function NavBar(props:NavBarProps) {
+
     return(
         <div className={clAss.nav}>
         <li className={clAss.item}>

@@ -7,8 +7,24 @@ type ProfileReduserStateType = {
     messages: ArreyMessagesType[],
     newMessageValue: string
 }
+let initialState = {
+    dialogs: [
+        {name: 'Dimych', id: 1},
+        {name: 'Andrey', id: 2},
+        {name: 'Sveta', id: 3},
+        {name: 'Valera', id: 4},
+        {name: 'Sasha', id: 5},
+    ],
+    messages: [
+        {message: 'Hi', id: v1()},
+        {message: 'Hello', id: v1()},
+        {message: 'Yo', id: v1()},
+        {message: 'How are you?', id: v1()},
+    ],
+    newMessageValue: ""
+}
 
-const DialogsReduser = (action: ActionTypes, state: ProfileReduserStateType) => {
+const DialogsReduser = (state: ProfileReduserStateType = initialState,action:  any = {}) => {
 
     switch (action.type) {
         case 'ADD-MESSAGE':

@@ -9,6 +9,7 @@ export type FriendsType = {
     name: string
 }
 const Friends = (props: NavBarProps) => {
+
     return (
         <div className={stl.mainWrapper}>
             <h2 className={stl.title}>Friends</h2>

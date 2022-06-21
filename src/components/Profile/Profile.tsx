@@ -2,7 +2,7 @@ import React from "react";
 import comp from './Profile.module.css'
 import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo";
-import {ArreyPostType} from "../Redax/State";
+import {ArreyPostType} from "../Redux/State";
 export type ProfileType ={
     post:ArreyPostType[]
     dispatch: (action:any) => void

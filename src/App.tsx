@@ -8,7 +8,7 @@ import {BrowserRouter, Route} from "react-router-dom";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
-import {StateType} from "./components/Redax/State";
+import {StateType} from "./components/Redux/State";
 
 
 export type AppPropsType = {
@@ -19,6 +19,7 @@ export type AppPropsType = {
 
 
 function App(props: AppPropsType) {
+
     const state = props.state
     return (
         <BrowserRouter>

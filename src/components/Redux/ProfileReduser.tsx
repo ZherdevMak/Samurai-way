@@ -5,8 +5,18 @@ type ProfileReduserStateType = {
     posts: ArreyPostType[],
     newPostValue: string
 }
+let initialState: ProfileReduserStateType = {
+    posts: [
+        {id: 1, message: 'Hi, how are you?', likesCount: 12},
+        {id: 2, message: 'It\'s my first post', likesCount: 10},
+        {id: 3, message: 'Hi, how are you?', likesCount: 2},
+        {id: 4, message: 'Hi, how a?', likesCount: 2},
+    ],
+    newPostValue: ""
+}
 
-const ProfileReduser = (action: ActionTypes, state: ProfileReduserStateType) => {
+const ProfileReduser = (state = initialState, action:any = {}) => {
+
     switch (action.type) {
         case 'ADD-POST':
             let newPost: ArreyPostType = {
