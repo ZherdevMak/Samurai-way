@@ -1,5 +1,5 @@
 import React from 'react';
-import {ActionTypes, ArreyPostType} from "./State";
+import {ArreyPostType} from "./State";
 
 type ProfileReduserStateType = {
     posts: ArreyPostType[],
@@ -15,7 +15,7 @@ let initialState: ProfileReduserStateType = {
     newPostValue: ""
 }
 
-const ProfileReduser = (state = initialState, action:any = {}) => {
+const ProfileReduser = (state = initialState, action:MainProfileActionType) => {
 
     switch (action.type) {
         case 'ADD-POST':
@@ -34,16 +34,20 @@ const ProfileReduser = (state = initialState, action:any = {}) => {
             return state
     }
 };
+type MainProfileActionType = addPostACType | addNewTextACType
+type addPostACType = ReturnType<typeof addPostActionCreator>
+type addNewTextACType = ReturnType<typeof addNewTextActionCreator>
+
 export const addPostActionCreator = () => {
 
     return {
         type: 'ADD-POST'
-    }
+    } as const
 }
 export const addNewTextActionCreator = (text: string) => {
     return {
         type: 'ADD-NEW-TEXT',
         newText: text
-    }
+    } as const
 }
 export default ProfileReduser;

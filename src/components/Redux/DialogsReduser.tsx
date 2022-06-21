@@ -1,6 +1,6 @@
 import React from 'react';
 import {v1} from "uuid";
-import {ActionTypes, ArreyDialogsType, ArreyMessagesType} from "./State";
+import {ArreyDialogsType, ArreyMessagesType} from "./State";
 
 type ProfileReduserStateType = {
     dialogs: ArreyDialogsType[],
@@ -24,7 +24,7 @@ let initialState = {
     newMessageValue: ""
 }
 
-const DialogsReduser = (state: ProfileReduserStateType = initialState,action:  any = {}) => {
+const DialogsReduser = (state: ProfileReduserStateType = initialState,action:MainDialogActionType) => {
 
     switch (action.type) {
         case 'ADD-MESSAGE':
@@ -42,16 +42,19 @@ const DialogsReduser = (state: ProfileReduserStateType = initialState,action:  a
             return state
     }
 };
+type MainDialogActionType = addNewMessageACType | addNewMessageTextACType
+type addNewMessageACType = ReturnType<typeof addNewMessageCreator>
+type addNewMessageTextACType = ReturnType<typeof addNewMessageTextActionCreator>
 export const addNewMessageCreator = () => {
     return {
         type: 'ADD-MESSAGE'
-    }
+    } as const
 }
 export const addNewMessageTextActionCreator = (messageText: string) => {
     return {
         type: 'ADD-NEW-MESSAGE-TEXT',
         newMessageValue: messageText
-    }
+    } as const
 }
 
 export default DialogsReduser;

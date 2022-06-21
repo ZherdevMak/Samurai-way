@@ -1,7 +1,7 @@
 import React from 'react';
 import {v1} from "uuid";
 import stl from './Friends.module.css'
-import {NavBarProps} from "../Nav";
+
 type FriendsType = {
     friends: FriendType[]
 }
@@ -17,7 +17,7 @@ const Friends = (props: FriendsType) => {
         <div className={stl.mainWrapper}>
             <h2 className={stl.title}>Friends</h2>
             <div className={stl.wrapper}>
-                {props.friends.map((f:FriendType) => {
+                {props.friends.map((f) => {
                     return (
                         <div key={v1()}>
                             <img className={stl.friendsAvatar} src={f.avatar} alt = "avatar"/>

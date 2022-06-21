@@ -113,7 +113,9 @@ export let store: StoreType = {
     },
 
     dispatch(action) {
+        // @ts-ignore
         this._state.profile = ProfileReduser(action, this._state.profile)
+        // @ts-ignore
         this._state.dialogs = DialogsReduser(action, this._state.dialogs)
         this._state.sidebar = SidebarReduser(action, this._state.sidebar)
         this.renderEntireTree()

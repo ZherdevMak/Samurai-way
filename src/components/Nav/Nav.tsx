@@ -2,8 +2,8 @@ import React from "react";
 import clAss from './Nav.module.css'
 import {NavLink} from "react-router-dom";
 import FriendsContainer from "./Friends/FriendsContainer";
-export type NavBarProps = {
 
+export type NavBarProps = {
     store:any
 }
 

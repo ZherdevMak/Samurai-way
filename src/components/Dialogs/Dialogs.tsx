@@ -3,28 +3,20 @@ import comp from './Dialogs.module.css'
 import {v1} from "uuid";
 import Item from "./DialogsItem/DialogsItem";
 import Message from "./Message/Message";
-import {
-    addNewMessageCreator,
-    addNewMessageTextActionCreator,
-
-} from "../Redux/DialogsReduser";
 import {ArreyDialogsType} from "../Redux/State";
 
-export type itemProps = {
-    'name': string;
-    'id': number;
-}
 export type messageProps = {
     'message': string
 }
 export type DialogsType = {
-    dialogs?: ArreyDialogsType[]
-    messages?: messageProps[]
-    dispatch: (action:any) => void
+    dialogs: ArreyDialogsType[]
+    messages: messageProps[]
+    addPost: () => void
     newMessageValue:string
+    newPostOnChange: (text:string)=> void
 }
 
-export function Dialogs(props:any) {
+export function Dialogs(props:DialogsType) {
     let newText = React.createRef<HTMLTextAreaElement>()
 
    const newPostOnChange = () => {
@@ -35,13 +27,8 @@ export function Dialogs(props:any) {
     const addPost = () => {
         props.addPost()
     }
-    // const newMessage = () => {
-    //     let text = newText.current?.value
-    //     alert(text)
-    // }
 
-
-    const dialogs = props.dialogs?.map((d: { name: string; id: number; }) => {
+    const dialogs = props.dialogs?.map((d) => {
         return (
             <div key={v1()}>
                 <div><Item name={d.name} id={d.id}/></div>
