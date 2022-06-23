@@ -9,6 +9,7 @@ import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
 import {StateType} from "./components/Redux/State";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
+import StoreContext from "./components/Redux/StoreContext";
 
 
 export type AppPropsType = {
@@ -25,7 +26,7 @@ function App(props: AppPropsType) {
                 <NavBar store={props.store}/>
                 <div className="dialog_content">
                     <Route exact path='/Dialogs'
-                           render={() => <DialogsContainer store={props.store}/>}/>
+                           render={() => <DialogsContainer />}/>
 
                     <Route path='/Profile' render={() => <Profile store={props.store}/>}/>
                     <Route path='/News' render={() => <News/>}/>

@@ -32,12 +32,10 @@ const DialogsReduser = (state: ProfileReduserStateType = initialState,action:Mai
                 id: v1(),
                 message: state.newMessageValue,
             }
-            state.messages.push(newMessage)
-            state.newMessageValue = ''
-            return state;
+            return {...state,messages:[...state.messages,newMessage],newMessageValue:""}
         case 'ADD-NEW-MESSAGE-TEXT':
-            state.newMessageValue = action.newMessageValue
-            return state;
+             let newMessages = action.newMessageValue
+            return {...state,newMessageValue:newMessages};
         default:
             return state
     }

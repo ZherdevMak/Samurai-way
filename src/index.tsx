@@ -3,14 +3,18 @@ import './index.css';
 import store from "./components/Redux/ReduxStore";
 import ReactDOM from "react-dom";
 import App from "./App";
+import {Provider} from "react-redux";
 
 
-export let renderEntireTree = (state:any) => {
 
-    ReactDOM.render(<App state={state} store = {store} />,
+export let renderEntireTree = (state: any) => {
+
+    ReactDOM.render(<Provider store={store}><App state={state} store={store}/></Provider>,
         document.getElementById('root'));
 }
 renderEntireTree(store.getState())
 store.subscribe(() => {
-    let  state = store.getState();
-    renderEntireTree(state)})
+    let state = store.getState();
+    renderEntireTree(state)
+})
+export default Provider
