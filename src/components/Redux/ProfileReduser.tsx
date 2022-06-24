@@ -1,7 +1,7 @@
 import React from 'react';
 import {ArreyPostType} from "./State";
 
-type ProfileReduserStateType = {
+export type ProfileReduserStateType = {
     posts: ArreyPostType[],
     newPostValue: string
 }
@@ -15,7 +15,7 @@ let initialState: ProfileReduserStateType = {
     newPostValue: ""
 }
 
-const ProfileReduser = (state = initialState, action:MainProfileActionType) => {
+const ProfileReduser = (state:ProfileReduserStateType = initialState, action:MainProfileActionType):ProfileReduserStateType => {
 
     switch (action.type) {
         case 'ADD-POST':
@@ -24,12 +24,12 @@ const ProfileReduser = (state = initialState, action:MainProfileActionType) => {
                 message: state.newPostValue,
                 likesCount: 0
             }
-            state.posts.push(newPost)
-            state.newPostValue = '';
-            return state;
+            // state.posts.push(newPost)
+            // state.newPostValue = '';
+            return {...state,posts:[...state.posts,newPost],newPostValue:""}
         case 'ADD-NEW-TEXT':
-            state.newPostValue = action.newText
-            return state;
+            let newPostInputvalue = action.newText
+            return {...state,newPostValue:newPostInputvalue};
         default:
             return state
     }

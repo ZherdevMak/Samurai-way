@@ -3,23 +3,14 @@ import comp from './Dialogs.module.css'
 import {v1} from "uuid";
 import Item from "./DialogsItem/DialogsItem";
 import Message from "./Message/Message";
-import {ArreyDialogsType, ArreyMessagesType} from "../Redux/State";
+import {DialogPropsType} from "./DialogsContainer";
 
 export type messageProps = {
     'message': string
 }
-export type DialogsType = {
-    dialogs: {
-    dialogs: ArreyDialogsType[],
-    messages: ArreyMessagesType[],
-    newMessageValue: string
-}
-    addPost: () => void
-    // newMessageValue:string
-    newPostOnChange: (text:string)=> void
-}
 
-export function Dialogs(props:DialogsType) {
+
+export function Dialogs(props:DialogPropsType) {
 
     let newText = React.createRef<HTMLTextAreaElement>()
 

@@ -2,24 +2,25 @@ import React from "react";
 import comp from './MyPosts.module.css'
 import Post from "./Post/Post";
 import {v1} from "uuid";
+import {MyPostsPropsType} from "../MyPostsContainer";
 
-type PostType = {
-    message: string
-    likesCount: number
-    id: number
-}
-type MyPostsType = {
-    post:PostType[]
-    addPost:()=>void
-    newPostOnChange:(text:string)=>void
-    newPostValue:string
-}
-function MyPosts(props:MyPostsType) {
+// type PostType = {
+//     message: string
+//     likesCount: number
+//     id: number
+// }
+// type MyPostsType = {
+//     post:PostType[]
+//     addPost:()=>void
+//     newPostOnChange:(text:string)=>void
+//     newPostValue:string
+// }
+function MyPosts(props:MyPostsPropsType) {
     let newPostElement = React.createRef<HTMLTextAreaElement>()
     const addPost = () => {
     props.addPost()
     }
-    const posts = props.post.map((p) => <Post key={v1()} message={p.message} likesCount={p.likesCount} id={p.id}/>)
+    const posts = props.posts.map((p) => <Post key={v1()} message={p.message} likesCount={p.likesCount} id={p.id}/>)
 
     const newPostOnChange = () => {
         if (newPostElement.current!==null){

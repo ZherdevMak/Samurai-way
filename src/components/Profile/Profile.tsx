@@ -1,16 +1,14 @@
 import React from "react";
 import comp from './Profile.module.css'
 import ProfileInfo from "./ProfileInfo";
-import MyPostsContainer from "./MyPostsContainer";
-export type ProfileType ={
-    store:any
-}
+import {MyPostsContainer} from "./MyPostsContainer";
 
-function Profile(props: ProfileType) {
+
+function Profile() {
     return (
         <main className={comp.content}>
             <ProfileInfo/>
-            <MyPostsContainer store = {props.store}/>
+            <MyPostsContainer/>
         </main>)
 }
 
