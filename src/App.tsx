@@ -7,12 +7,12 @@ import Music from "./components/Music/Music";
 import {BrowserRouter, Route} from "react-router-dom";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
-import {StateType} from "./components/Redux/State";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
+import {UsersContainer} from "./components/Users/UsersContainer";
 
 
 export type AppPropsType = {
-    state: StateType
+
     store: any
 }
 
@@ -26,6 +26,8 @@ function App(props: AppPropsType) {
                 <div className="dialog_content">
                     <Route exact path='/Dialogs'
                            render={() => <DialogsContainer />}/>
+                    <Route exact path='/Users'
+                           render={() => <UsersContainer/>}/>
 
                     <Route path='/Profile' render={() => <Profile />}/>
                     <Route path='/News' render={() => <News/>}/>

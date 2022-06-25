@@ -2,10 +2,10 @@ import React from "react";
 import {
     addNewMessageCreator, addNewMessageTextActionCreator, DialogsReduserStateType,
 } from "../Redux/DialogsReduser";
-import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
 import {AppStateType} from "../Redux/ReduxStore";
 import {Dispatch} from "redux";
+import {Dialogs} from "./Dialogs";
 
 type mapStateToPropsType = {
     dialogs:DialogsReduserStateType
