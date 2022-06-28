@@ -1,13 +1,16 @@
 import React from 'react';
-import {v1} from "uuid";
+export type UserPhotos = {
+    small: string | null
+    large: string | null
+}
 
 export type UsersStateType = {
     id: string,
-    photoUrl: string,
+    photos: UserPhotos,
     followed: boolean,
-    fullName: string,
+    name: string,
     status: string,
-    location: { city: string, country: string }
+    // location: { city: string, country: string }
 }
 export type UsersReduserStateType = {
     users: Array<UsersStateType>
@@ -17,34 +20,11 @@ export type UsersReduserStateType = {
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET_USERS'
-let initialState = {
-    users: [
-        {
-            id: v1(),
-            photoUrl: 'https://avatars.mds.yandex.net/get-kinopoisk-image/1600647/2dd179dd-8c5a-4d5d-ad11-34b30529dac1/1920x',
-            followed: true,
-            fullName: 'Dmitry',
-            status: 'Boss',
-            location: {city: 'Minsk', country: 'Belarus'}
-        },
-        {
-            id: v1(),
-            photoUrl: 'https://avatars.mds.yandex.net/get-kinopoisk-image/1600647/2dd179dd-8c5a-4d5d-ad11-34b30529dac1/1920x',
-            followed: false,
-            fullName: 'Sergey',
-            status: 'Chief',
-            location: {city: 'Moscow', country: 'Russia'}
-        },
-        {
-            id: v1(),
-            photoUrl: 'https://avatars.mds.yandex.net/get-kinopoisk-image/1600647/2dd179dd-8c5a-4d5d-ad11-34b30529dac1/1920x',
-            followed: false,
-            fullName: 'Victor',
-            status: 'Red Chief',
-            location: {city: 'Kiew', country: 'Ukrane'}
-        },
-    ],
 
+
+
+let initialState:UsersReduserStateType = {
+    users: []
 }
 
 const UsersReduser = (state = initialState, action: MainUsersActionType): UsersReduserStateType => {
