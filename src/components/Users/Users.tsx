@@ -6,12 +6,14 @@ import axios from 'axios';
 import userAvatar from '../../assets/images/avatar.jpg'
 
 const Users = (props: UsersPropsType) => {
+    let getUsers = () => {
     if (props.users.length === 0) {
         axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response=> {
             props.setUsers(response.data.items)
         })
-    }
+    }}
 return <div>
+    <button onClick={getUsers}>Get Users</button>
     {props.users.map(el => {
         return <div key={v1()}>
                 <span>
