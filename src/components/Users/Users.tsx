@@ -5,32 +5,57 @@ import stl from './users.module.css'
 import axios from 'axios';
 import userAvatar from '../../assets/images/avatar.jpg'
 
-const Users = (props: UsersPropsType) => {
-    let getUsers = () => {
-    if (props.users.length === 0) {
-        axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response=> {
-            props.setUsers(response.data.items)
+
+class Users extends React.Component<UsersPropsType> {
+    componentDidMount() {
+
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
+            this.props.setUsers(response.data.items)
+            this.props.setTotalUsersCount(response.data.totalCount)
         })
-    }}
-return <div>
-    <button onClick={getUsers}>Get Users</button>
-    {props.users.map(el => {
-        return <div key={v1()}>
+    }
+    onPageChanged = (el:number) =>{
+        this.props.setCurrentPage(el)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${el}&count=${this.props.pageSize}`).then(response => {
+             this.props.setUsers(response.data.items)
+
+        })
+    }
+
+    render() {
+
+        let pagesCount = Math.ceil (this.props.totalUsersCount / this.props.pageSize)
+        let pages = []
+        for (let i = 1; i <= pagesCount; i++) {
+            pages.push(i)
+        }
+
+        return <div>
+            <div>
+                {pages.map(el => {
+
+                    return <span key={v1()} className={(this.props.currentPage === el) ? stl.selected : ''}
+                    onClick = {()=>{this.onPageChanged(el)}}>{` ${el} `}</span>
+                    })}
+            </div>
+            {this.props.users.map(el => {
+                return <div key={v1()}>
                 <span>
                     <div>
-                        <img className ={stl.userPhoto } src={ el.photos.small !== null ? el.photos.small : userAvatar} alt=""/>
+                        <img className={stl.userPhoto} src={el.photos.small !== null ? el.photos.small : userAvatar}
+                             alt=""/>
                     </div>
                     <div>
                         {el.followed
                             ? <button onClick={() => {
-                                props.unfollow(el.id)
+                                this.props.unfollow(el.id)
                             }}>Unfollow</button>
                             : <button onClick={() => {
-                                props.follow(el.id)
+                                this.props.follow(el.id)
                             }}>Follow</button>}
                     </div>
                 </span>
-            <span>
+                    <span>
                     <span>
                         <div>{el.name}</div>
                         <div>{el.status}</div>
@@ -40,11 +65,11 @@ return <div>
                         <div>{'el.location.city'}</div>
                     </span>
                 </span>
+                </div>
+            })}
         </div>
-    })}
-</div>
-
+    }
 }
-;
+
 
 export default Users;
