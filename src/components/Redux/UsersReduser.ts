@@ -1,4 +1,3 @@
-import React from 'react';
 export type UserPhotos = {
     small: string | null
     large: string | null
@@ -16,7 +15,8 @@ export type UsersReduserStateType = {
     users: Array<UsersStateType>,
     pageSize: number
     totalUsersCount: number,
-    currentPage: number
+    currentPage: number,
+    isFetching: boolean
 }
 
 
@@ -25,6 +25,7 @@ const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET_USERS'
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 const SET_TOTAL_COUNT = 'SET_TOTAL_COUNT'
+const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHIN'
 
 
 
@@ -33,7 +34,8 @@ let initialState:UsersReduserStateType = {
     users: [],
     pageSize: 100,
     totalUsersCount: 0,
-    currentPage:198
+    currentPage:198,
+    isFetching:false
 }
 
 const UsersReduser = (state = initialState, action: MainUsersActionType): UsersReduserStateType => {
@@ -65,16 +67,20 @@ const UsersReduser = (state = initialState, action: MainUsersActionType): UsersR
             return {...state, currentPage:action.currentPage }
         case SET_TOTAL_COUNT:
             return {...state, totalUsersCount:action.totalCount }
+        case TOGGLE_IS_FETCHING:
+            return {...state, isFetching:action.isFetching }
         default:
             return state
     }
 };
-type MainUsersActionType = followACType | unfollowACType | setUsersACType | setCurrentPageACType | setTotalUsersCountACType
+type MainUsersActionType = followACType | unfollowACType | setUsersACType |
+    setCurrentPageACType | setTotalUsersCountACType | toggleIsFetchingACType
 type followACType = ReturnType<typeof followAC>
 type unfollowACType = ReturnType<typeof unfollowAC>
 type setUsersACType = ReturnType<typeof setUsersAC>
 type setCurrentPageACType = ReturnType<typeof setCurrentPageAC>
 type setTotalUsersCountACType = ReturnType<typeof setTotalUsersCountAC>
+type toggleIsFetchingACType = ReturnType<typeof toggleIsFetchingAC>
 
 export const followAC = (userID: string) => {
     return {
@@ -104,6 +110,12 @@ export const setTotalUsersCountAC = (totalCount:number) => {
     return {
         type: SET_TOTAL_COUNT,
         totalCount
+    } as const
+}
+export const toggleIsFetchingAC = (isFetching:boolean) => {
+    return {
+        type: TOGGLE_IS_FETCHING,
+        isFetching: isFetching
     } as const
 }
 
