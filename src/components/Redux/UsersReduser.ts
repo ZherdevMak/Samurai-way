@@ -75,44 +75,44 @@ const UsersReduser = (state = initialState, action: MainUsersActionType): UsersR
 };
 type MainUsersActionType = followACType | unfollowACType | setUsersACType |
     setCurrentPageACType | setTotalUsersCountACType | toggleIsFetchingACType
-type followACType = ReturnType<typeof followAC>
-type unfollowACType = ReturnType<typeof unfollowAC>
-type setUsersACType = ReturnType<typeof setUsersAC>
-type setCurrentPageACType = ReturnType<typeof setCurrentPageAC>
-type setTotalUsersCountACType = ReturnType<typeof setTotalUsersCountAC>
-type toggleIsFetchingACType = ReturnType<typeof toggleIsFetchingAC>
+type followACType = ReturnType<typeof follow>
+type unfollowACType = ReturnType<typeof unfollow>
+type setUsersACType = ReturnType<typeof setUsers>
+type setCurrentPageACType = ReturnType<typeof setCurrentPage>
+type setTotalUsersCountACType = ReturnType<typeof setTotalUsersCount>
+type toggleIsFetchingACType = ReturnType<typeof toggleIsFetching>
 
-export const followAC = (userID: string) => {
+export const follow = (userID: string) => {
     return {
         type: FOLLOW,
         userID
     } as const
 }
-export const unfollowAC = (userID: string) => {
+export const unfollow = (userID: string) => {
     return {
         type: UNFOLLOW,
         userID
     } as const
 }
-export const setUsersAC = (users:UsersStateType[]) => {
+export const setUsers = (users:UsersStateType[]) => {
     return {
         type: SET_USERS,
         users
     } as const
 }
-export const setCurrentPageAC = (currentPage:number) => {
+export const setCurrentPage = (currentPage:number) => {
     return {
         type: SET_CURRENT_PAGE,
         currentPage
     } as const
 }
-export const setTotalUsersCountAC = (totalCount:number) => {
+export const setTotalUsersCount = (totalCount:number) => {
     return {
         type: SET_TOTAL_COUNT,
         totalCount
     } as const
 }
-export const toggleIsFetchingAC = (isFetching:boolean) => {
+export const toggleIsFetching = (isFetching:boolean) => {
     return {
         type: TOGGLE_IS_FETCHING,
         isFetching: isFetching

@@ -1,13 +1,12 @@
 import React from "react";
 import {AppStateType} from "../Redux/ReduxStore";
-import {Dispatch} from "redux";
 import {connect} from "react-redux";
 import {
-    followAC,
-    setCurrentPageAC,
-    setTotalUsersCountAC,
-    setUsersAC, toggleIsFetchingAC,
-    unfollowAC,
+    follow,
+    setCurrentPage,
+    setTotalUsersCount,
+    setUsers, toggleIsFetching,
+    unfollow,
     UsersStateType
 } from "../Redux/UsersReduser";
 import axios from "axios";
@@ -28,25 +27,25 @@ type mapDispatchToPropsType ={
     setUsers:(users:UsersStateType[])=>void
     setCurrentPage:(pageNumber:number)=>void
     setTotalUsersCount:(totalCount:number)=>void
-    isFetchingfunc:(isFetching:boolean)=>void
+    toggleIsFetching:(isFetching:boolean)=>void
 }
 export type UsersPropsType = mapStateToPropsType & mapDispatchToPropsType
 
 class UsersApi extends React.Component<UsersPropsType> {
     componentDidMount() {
-    this.props.isFetchingfunc(true)
+    this.props.toggleIsFetching(true)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
-            this.props.isFetchingfunc(false)
+            this.props.toggleIsFetching(false)
             this.props.setUsers(response.data.items)
             this.props.setTotalUsersCount(response.data.totalCount)
         })
     }
     onPageChanged = (el:number) =>{
-        this.props.isFetchingfunc(true)
+        this.props.toggleIsFetching(true)
         this.props.setCurrentPage(el)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${el}&count=${this.props.pageSize}`).then(response => {
             this.props.setUsers(response.data.items)
-            this.props.isFetchingfunc(false)
+            this.props.toggleIsFetching(false)
 
         })
     }
@@ -75,17 +74,23 @@ let mapStateToProps = (state:AppStateType):mapStateToPropsType => {
         isFetching:state.users.isFetching
     }
 }
-let mapDispatchToProps = (dispatch:Dispatch):mapDispatchToPropsType => {
-    return {
-        follow: (userID) => {dispatch(followAC(userID))},
-        unfollow: (userID) => {dispatch(unfollowAC(userID))},
-        setUsers: (users) => {dispatch(setUsersAC(users))},
-        setCurrentPage: (pageNumber) => {dispatch(setCurrentPageAC(pageNumber))},
-        setTotalUsersCount: (totalCount) => {dispatch(setTotalUsersCountAC(totalCount))},
-        isFetchingfunc: (isFetching) => {dispatch(toggleIsFetchingAC(isFetching))}
-    }
-}
+// let mapDispatchToProps = (dispatch:Dispatch):mapDispatchToPropsType => {
+//     return {
+//         follow: (userID) => {dispatch(followAC(userID))},
+//         unfollow: (userID) => {dispatch(unfollowAC(userID))},
+//         setUsers: (users) => {dispatch(setUsersAC(users))},
+//         setCurrentPage: (pageNumber) => {dispatch(setCurrentPageAC(pageNumber))},
+//         setTotalUsersCount: (totalCount) => {dispatch(setTotalUsersCountAC(totalCount))},
+//         isFetchingfunc: (isFetching) => {dispatch(toggleIsFetchingAC(isFetching))}
+//     }
+// }
 
-export const UsersContainer = connect (mapStateToProps,mapDispatchToProps) (UsersApi)
+export const UsersContainer = connect (mapStateToProps,{
+    follow,
+    unfollow,
+    setUsers,
+    setCurrentPage,
+    setTotalUsersCount,
+    toggleIsFetching}) (UsersApi)
 
 
