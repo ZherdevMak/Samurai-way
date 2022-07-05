@@ -1,4 +1,4 @@
-import {combineReducers, createStore} from "redux";
+import {combineReducers,legacy_createStore} from "redux";
 import ProfileReduser from "./ProfileReduser";
 import DialogsReduser from "./DialogsReduser";
 import SidebarReduser from "./SidebarReduser";
@@ -10,6 +10,8 @@ let redusers = combineReducers({
     sidebar:SidebarReduser,
     users:UsersReduser
 })
-let store = createStore(redusers)
+let store = legacy_createStore(redusers)
+// @ts-ignore
+window.store = store
 export type AppStateType = ReturnType<typeof redusers>
 export default store

@@ -4,10 +4,10 @@ import ProfileInfo from "./ProfileInfo";
 import {MyPostsContainer} from "./MyPostsContainer";
 
 
-function Profile() {
+function Profile(props:any) {
     return (
         <main className={comp.content}>
-            <ProfileInfo/>
+            <ProfileInfo profile={props.profile}/>
             <MyPostsContainer/>
         </main>)
 }

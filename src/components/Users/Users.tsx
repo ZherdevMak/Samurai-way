@@ -3,6 +3,7 @@ import {v1} from "uuid";
 import stl from "./users.module.css";
 import userAvatar from "../../assets/images/avatar.jpg";
 import {UsersStateType} from "../Redux/UsersReduser";
+import {NavLink} from "react-router-dom";
 type UserPropsType1 = {
     users: Array<UsersStateType>,
     pageSize: number
@@ -35,8 +36,10 @@ const Users = (props:UserPropsType1) => {
                 return <div key={v1()}>
                 <span>
                     <div>
+                        <NavLink to = {'/profile/' + el.id}>
                         <img className={stl.userPhoto} src={el.photos.small !== null ? el.photos.small : userAvatar}
                              alt=""/>
+                        </NavLink>
                     </div>
                     <div>
                         {el.followed

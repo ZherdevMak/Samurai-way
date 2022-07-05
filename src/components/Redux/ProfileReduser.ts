@@ -1,9 +1,10 @@
-import React from 'react';
 import {ArreyPostType} from "./State";
 
 export type ProfileReduserStateType = {
     posts: ArreyPostType[],
-    newPostValue: string
+    newPostValue: string,
+    profile: string
+
 }
 let initialState: ProfileReduserStateType = {
     posts: [
@@ -12,7 +13,8 @@ let initialState: ProfileReduserStateType = {
         {id: 3, message: 'Hi, how are you?', likesCount: 2},
         {id: 4, message: 'Hi, how a?', likesCount: 2},
     ],
-    newPostValue: ""
+    newPostValue: "",
+    profile: ''
 }
 
 const ProfileReduser = (state:ProfileReduserStateType = initialState, action:MainProfileActionType):ProfileReduserStateType => {
@@ -30,13 +32,17 @@ const ProfileReduser = (state:ProfileReduserStateType = initialState, action:Mai
         case 'ADD-NEW-TEXT':
             let newPostInputvalue = action.newText
             return {...state,newPostValue:newPostInputvalue};
+        case 'SET-USER-PROFILE':
+
+            return {...state,profile: action.profile};
         default:
             return state
     }
 };
-type MainProfileActionType = addPostACType | addNewTextACType
+type MainProfileActionType = addPostACType | addNewTextACType | setUserProfileType
 type addPostACType = ReturnType<typeof addPostActionCreator>
 type addNewTextACType = ReturnType<typeof addNewTextActionCreator>
+type setUserProfileType = ReturnType<typeof setUserProfile>
 
 export const addPostActionCreator = () => {
 
@@ -48,6 +54,12 @@ export const addNewTextActionCreator = (text: string) => {
     return {
         type: 'ADD-NEW-TEXT',
         newText: text
+    } as const
+}
+export const setUserProfile = (profile: any) => {
+    return {
+        type: 'SET-USER-PROFILE',
+        profile: profile
     } as const
 }
 export default ProfileReduser;
