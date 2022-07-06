@@ -29,7 +29,7 @@ function App(props: AppPropsType) {
                     <Route exact path='/Users'
                            render={() => <UsersContainer/>}/>
 
-                    <Route path='/Profile' render={() => <ProfileContainer />}/>
+                    <Route path='/Profile/:userId?' render={() => <ProfileContainer />}/>
                     <Route path='/News' render={() => <News/>}/>
                     <Route path='/Music' render={() => <Music/>}/>
                     <Route path='/Settings' render={() => <Settings/>}/>

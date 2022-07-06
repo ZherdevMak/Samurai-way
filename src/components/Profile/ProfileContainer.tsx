@@ -4,11 +4,41 @@ import axios from "axios";
 import {connect} from "react-redux";
 import {AppStateType} from "../Redux/ReduxStore";
 import {setUserProfile} from "../Redux/ProfileReduser";
+import {RouteComponentProps, withRouter} from "react-router-dom";
 
+export type ProfileType = {
+    aboutMe:string
+    contacts: ContactsProps
+    fullName: string
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    photos:PhotosProps
+    userId:number
+}
+type ContactsProps = {
+    github: string
+    vk: string
+    facebook: string
+    instagram: string
+    twitter: string
+    website:string
+    youtube: string
+    mainLink: string
+}
 
-class ProfileContainer extends React.Component<ProfileContainerPropsType> {
+type PhotosProps = {
+    small: string
+    large: string
+}
+type PathParamsType = {
+    userId: string
+}
+type CommonPropsType = RouteComponentProps<PathParamsType> & ProfileContainerPropsType
+
+class ProfileContainer extends React.Component<CommonPropsType> {
     componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`).then(response => {
+        let userId = this.props.match.params.userId
+        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/`+ userId).then(response => {
             this.props.setUserProfile(response.data)
         })
     }
@@ -20,21 +50,17 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType> {
     }
 }
 type mapStateToPropsType = {
-    profile:any
-
+    profile: ProfileType
 }
 type mapDispatchToPropsType ={
-    setUserProfile:(profile:string)=>void
+    setUserProfile:(profile:ProfileType)=>void
 }
 export type ProfileContainerPropsType = mapStateToPropsType & mapDispatchToPropsType
 let mapStateToProps = (state:AppStateType):mapStateToPropsType => {
     return {
-        profile:state.profile
+        profile:state.profile.profile
     }
 }
+let withUrlProfileContainer = withRouter(ProfileContainer)
 
-
-
-
-
-export default connect (mapStateToProps, {setUserProfile}) (ProfileContainer);
+export default connect (mapStateToProps, {setUserProfile}) (withUrlProfileContainer);

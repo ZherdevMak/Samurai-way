@@ -1,9 +1,10 @@
 import {ArreyPostType} from "./State";
+import {ProfileType} from "../Profile/ProfileContainer";
 
 export type ProfileReduserStateType = {
     posts: ArreyPostType[],
     newPostValue: string,
-    profile: string
+    profile: ProfileType
 
 }
 let initialState: ProfileReduserStateType = {
@@ -14,10 +15,30 @@ let initialState: ProfileReduserStateType = {
         {id: 4, message: 'Hi, how a?', likesCount: 2},
     ],
     newPostValue: "",
-    profile: ''
+    profile: {
+        aboutMe:'',
+        contacts: {
+            github: '',
+            vk: '',
+            facebook: '',
+            instagram: '',
+            twitter: '',
+            website:'',
+            youtube: '',
+            mainLink: ''
+        },
+        fullName: '',
+        lookingForAJob: false,
+        lookingForAJobDescription: '',
+        photos: {
+            small: '',
+            large: ''
+        },
+        userId:0
+    }
 }
 
-const ProfileReduser = (state:ProfileReduserStateType = initialState, action:MainProfileActionType):ProfileReduserStateType => {
+const ProfileReduser = (state:ProfileReduserStateType = initialState, action:MainProfileActionType):{ newPostValue: string; profile: ProfileType; posts: ArreyPostType[] } => {
 
     switch (action.type) {
         case 'ADD-POST':
@@ -33,7 +54,6 @@ const ProfileReduser = (state:ProfileReduserStateType = initialState, action:Mai
             let newPostInputvalue = action.newText
             return {...state,newPostValue:newPostInputvalue};
         case 'SET-USER-PROFILE':
-
             return {...state,profile: action.profile};
         default:
             return state
@@ -56,7 +76,7 @@ export const addNewTextActionCreator = (text: string) => {
         newText: text
     } as const
 }
-export const setUserProfile = (profile: any) => {
+export const setUserProfile = (profile: ProfileType) => {
     return {
         type: 'SET-USER-PROFILE',
         profile: profile
