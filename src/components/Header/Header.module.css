@@ -5,3 +5,9 @@
 .Header img {
     width: 20px;
 }
+.login {
+    float: right;
+}
+.login a {
+    color: white;
+}
