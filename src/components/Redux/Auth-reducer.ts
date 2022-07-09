@@ -1,11 +1,10 @@
-import {AppStateType, stateType} from "./ReduxStore";
-import {DialogsReduserStateType} from "./DialogsReduser";
 
 
 export type AuthReduserStateType = {
     id: number | null,
     email: string | null,
     login: string | null,
+    isAuth:boolean
 
 }
 
@@ -19,6 +18,7 @@ let initialState:AuthReduserStateType = {
     id: null,
     email: null,
     login: null,
+    isAuth:false
 }
 
 export const AuthReduser = (state:AuthReduserStateType = initialState, action: SetUserDataACType): AuthReduserStateType => {
@@ -27,7 +27,8 @@ export const AuthReduser = (state:AuthReduserStateType = initialState, action: S
         case SET_USER_DATA:
             return {
                 ...state,
-                ...action.data}
+                ...action.data,
+            isAuth:true}
         default: return state
 
 }}
@@ -35,7 +36,7 @@ export const AuthReduser = (state:AuthReduserStateType = initialState, action: S
 export type SetUserDataACType = ReturnType<typeof SetUserDataAC>
 
 
-export const SetUserDataAC = (id: number | null, email: string | null, login: string | null,) => {
+export const SetUserDataAC = (id: number | null, email: string | null, login: string | null) => {
     return {
         type: SET_USER_DATA,
         data: {id,email,login}
