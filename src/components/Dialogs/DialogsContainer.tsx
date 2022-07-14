@@ -9,6 +9,7 @@ import {Dialogs} from "./Dialogs";
 
 type mapStateToPropsType = {
     dialogs:DialogsReduserStateType
+    isAuth:boolean
 }
 type mapDispatchToPropsType ={
     addPost: ()=>void
@@ -18,7 +19,8 @@ export type DialogPropsType = mapStateToPropsType & mapDispatchToPropsType
 
 let mapStateToProps = (state:AppStateType):mapStateToPropsType => {
     return {
-        dialogs: state.dialogs
+        dialogs: state.dialogs,
+        isAuth:state.auth.isAuth
     }
 }
 let mapDispatchToProps = (dispatch:Dispatch):mapDispatchToPropsType => {
