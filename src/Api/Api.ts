@@ -9,12 +9,19 @@ const instanse = axios.create({
         'API-KEY': 'd5319fd7-c99a-40ac-b17e-87174e69eee7'
     }
 })
+export const usersAPI = {
+    getUsers(currentPage = 1,pageSize = 10) {
 
-export const getUsers = (currentPage = 1,pageSize = 10) => {
-
-    return instanse.get(`users?page=${currentPage}&count=${pageSize}`)
-        .then(response=> {
-            return response.data
-        })
-
+        return instanse.get(`users?page=${currentPage}&count=${pageSize}`)
+            .then(response=> {
+                return response.data
+            })
+    },
+    follow(userID:string) {
+       return instanse.post(`follow/${userID}`)
+    },
+    unfollow(userID:string) {
+       return  instanse.delete(`follow/${userID}`)
+    }
 }
+

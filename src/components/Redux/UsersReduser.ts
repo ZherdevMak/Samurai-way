@@ -1,3 +1,5 @@
+import {usersAPI} from "../../Api/Api";
+
 export type UserPhotos = {
     small: string | null
     large: string | null
@@ -135,4 +137,38 @@ export const toggleIsFollowing = (isFollowing: boolean, userID: string) => {
     } as const
 }
 
+export const getUsersThunkCreator = (currentPage:number, pageSize:number) => {
+    return (dispatch:any) => {
+        dispatch(toggleIsFetching(true))
+        usersAPI.getUsers(currentPage, pageSize).then(data => {
+            dispatch(toggleIsFetching(false))
+            dispatch(setUsers(data.items))
+            dispatch(setTotalUsersCount(data.totalCount))
+        })
+    }
+}
+export const followThunkCreator = (userID:string) =>{
+    return (dispach:any) => {
+        dispach(toggleIsFollowing(true,userID))
+        usersAPI.follow(userID)
+            .then(response => {
+                if (response.data.resultCode === 0) {
+                    dispach(follow(userID))
+                }
+                dispach(toggleIsFollowing(false,userID))
+            })
+    }
+}
+export const unfollowThunkCreator = (userID:string) =>{
+    return (dispach:any) => {
+        dispach(toggleIsFollowing(true,userID))
+        usersAPI.unfollow(userID)
+            .then(response => {
+                if (response.data.resultCode === 0) {
+                    dispach(unfollow(userID))
+                }
+                dispach(toggleIsFollowing(false,userID))
+            })
+    }
+}
 export default UsersReduser;
