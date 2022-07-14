@@ -5,15 +5,16 @@ import SidebarReduser from "./SidebarReduser";
 import UsersReduser from "./UsersReduser";
 import {AuthReduser} from "./Auth-reducer";
 import thunkMiddleware from "redux-thunk"
+
 export type stateType = ReturnType<typeof store.getState>
 let redusers = combineReducers({
-    profile:ProfileReduser,
-    dialogs:DialogsReduser,
-    sidebar:SidebarReduser,
-    users:UsersReduser,
-    auth:AuthReduser
+    profile: ProfileReduser,
+    dialogs: DialogsReduser,
+    sidebar: SidebarReduser,
+    users: UsersReduser,
+    auth: AuthReduser
 })
-let store = legacy_createStore(redusers,applyMiddleware(thunkMiddleware))
+let store = legacy_createStore(redusers, applyMiddleware(thunkMiddleware))
 // @ts-ignore
 window.store = store
 export type AppStateType = ReturnType<typeof redusers>

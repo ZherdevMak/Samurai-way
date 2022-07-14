@@ -1,5 +1,6 @@
 import {ArreyPostType} from "./State";
 import {ProfileType} from "../Profile/ProfileContainer";
+import {usersAPI} from "../../Api/Api";
 
 export type ProfileReduserStateType = {
     posts: ArreyPostType[],
@@ -82,4 +83,10 @@ export const setUserProfile = (profile: ProfileType) => {
         profile: profile
     } as const
 }
+export const getUserProfile = (userID: string) =>
+    (dispatch: any) => {
+        usersAPI.getProfile(userID).then(response => {
+            dispatch(setUserProfile(response.data))
+        })
+    }
 export default ProfileReduser;
