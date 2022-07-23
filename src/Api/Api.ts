@@ -1,5 +1,8 @@
 import axios from "axios";
 
+export type StatusUpdateType = {
+    status:string
+}
 const BaseUrl = `https://social-network.samuraijs.com/api/1.0/`
 
 const instanse = axios.create({
@@ -24,7 +27,20 @@ export const usersAPI = {
         return instanse.delete(`follow/${userID}`)
     },
     getProfile(userID: string) {
+        console.warn('Use profileAPi object')
+        return profileAPI.getProfile(userID)
+    }
+}
+export const profileAPI = {
+
+    getProfile(userID: string) {
         return instanse.get(`profile/` + userID)
+    },
+    getStatus(userID: string) {
+        return instanse.get(`profile/status/` + userID)
+    },
+    updateStatus(status:StatusUpdateType) {
+        return instanse.put(`profile/status/`,{status:status})
     }
 }
 export const authAPI = {
