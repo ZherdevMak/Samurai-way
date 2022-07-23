@@ -4,7 +4,6 @@ import {v1} from "uuid";
 import Item from "./DialogsItem/DialogsItem";
 import Message from "./Message/Message";
 import {DialogPropsType} from "./DialogsContainer";
-import {Redirect} from "react-router-dom";
 
 export type messageProps = {
     'message': string
@@ -40,7 +39,6 @@ export function Dialogs(props:DialogPropsType) {
             </div>
         )
     })
-    if (!props.isAuth) return <Redirect to={'/login'}/>
     return (<div className={comp.dialogs}>
             <div className={comp.dialogsItems}>
                 {dialogs}
