@@ -29,6 +29,15 @@ class ProfileStatus extends React.Component<ProfileStatusProps> {
             status: e.currentTarget.value
         })
     }
+    componentDidUpdate(prevProps: Readonly<ProfileStatusProps>, prevState: Readonly<{}>) {
+        console.log('did mount')
+        if (prevProps.status!==this.props.status) {
+            console.log('if')
+            this.setState({
+                status: this.props.status
+            })
+        }
+    }
 
     render() {
         return (
