@@ -1,20 +1,18 @@
 import React from "react";
 import {
-    addNewMessageCreator, addNewMessageTextActionCreator, DialogsReduserStateType,
+    addNewMessageCreator, DialogsReduserStateType,
 } from "../Redux/DialogsReduser";
 import {connect} from "react-redux";
 import {AppStateType} from "../Redux/ReduxStore";
 import {compose, Dispatch} from "redux";
 import {Dialogs} from "./Dialogs";
 import {WithAuthRedirect} from "../../Hoc/withAuthRedirect";
-import {getUserProfile, setUserProfile} from "../Redux/ProfileReduser";
 
 type mapStateToPropsType = {
     dialogs:DialogsReduserStateType
 }
 type mapDispatchToPropsType ={
-    addPost: ()=>void
-    newPostOnChange:(text:string)=>void
+    addPost: (messageBody:string)=>void
 }
 export type DialogPropsType = mapStateToPropsType & mapDispatchToPropsType
 
@@ -25,13 +23,13 @@ let mapStateToProps = (state:AppStateType):mapStateToPropsType => {
 }
 let mapDispatchToProps = (dispatch:Dispatch):mapDispatchToPropsType => {
     return {
-        addPost: () => {dispatch(addNewMessageCreator())},
-        newPostOnChange: (text:string) => {dispatch(addNewMessageTextActionCreator(text))}
+        addPost: (messageBody) => {dispatch(addNewMessageCreator(messageBody))}
+
     }
 }
 
 export default compose<React.ComponentType>(
-    connect(mapStateToProps, {setUserProfile,getUserProfile}),
+    connect(mapStateToProps, mapDispatchToProps),
     WithAuthRedirect,
 )(Dialogs)
 

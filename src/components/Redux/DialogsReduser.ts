@@ -1,11 +1,10 @@
-import React from 'react';
 import {v1} from "uuid";
 import {ArreyDialogsType, ArreyMessagesType} from "./State";
 
 export type DialogsReduserStateType = {
     dialogs: ArreyDialogsType[],
-    messages: ArreyMessagesType[],
-    newMessageValue: string
+    messages: ArreyMessagesType[]
+
 }
 let initialState = {
     dialogs: [
@@ -21,38 +20,31 @@ let initialState = {
         {message: 'Yo', id: v1()},
         {message: 'How are you?', id: v1()},
     ],
-    newMessageValue: ""
+
 }
 
 const DialogsReduser = (state: DialogsReduserStateType = initialState,action:MainDialogActionType):DialogsReduserStateType => {
-
     switch (action.type) {
         case 'ADD-MESSAGE':
             let newMessage: ArreyMessagesType = {
+
                 id: v1(),
-                message: state.newMessageValue,
+                message: action.messageBody,
             }
-            return {...state,messages:[...state.messages,newMessage],newMessageValue:""}
-        case 'ADD-NEW-MESSAGE-TEXT':
-             let newMessages = action.newMessageValue
-            return {...state,newMessageValue:newMessages};
+            return {...state,messages:[...state.messages,newMessage]}
+
         default:
             return state
     }
 };
-type MainDialogActionType = addNewMessageACType | addNewMessageTextACType
+type MainDialogActionType = addNewMessageACType
 type addNewMessageACType = ReturnType<typeof addNewMessageCreator>
-type addNewMessageTextACType = ReturnType<typeof addNewMessageTextActionCreator>
-export const addNewMessageCreator = () => {
+export const addNewMessageCreator = (messageBody:string) => {
     return {
-        type: 'ADD-MESSAGE'
+        type: 'ADD-MESSAGE',
+        messageBody
     } as const
 }
-export const addNewMessageTextActionCreator = (messageText: string) => {
-    return {
-        type: 'ADD-NEW-MESSAGE-TEXT',
-        newMessageValue: messageText
-    } as const
-}
+
 
 export default DialogsReduser;

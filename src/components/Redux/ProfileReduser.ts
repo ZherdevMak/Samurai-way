@@ -4,7 +4,6 @@ import {profileAPI, usersAPI} from "../../Api/Api";
 
 export type ProfileReduserStateType = {
     posts: ArreyPostType[],
-    newPostValue: string,
     profile: ProfileType,
     status:string
 
@@ -17,7 +16,6 @@ let initialState: ProfileReduserStateType = {
         {id: 3, message: 'Hi, how are you?', likesCount: 2},
         {id: 4, message: 'Hi, how a?', likesCount: 2},
     ],
-    newPostValue: "",
     profile: {
         aboutMe:'',
         contacts: {
@@ -50,15 +48,12 @@ const ProfileReduser = (state:ProfileReduserStateType = initialState, action:Mai
         case 'ADD-POST':
             let newPost: ArreyPostType = {
                 id: 5,
-                message: state.newPostValue,
+                message: action.postBody,
                 likesCount: 0
             }
-            // state.posts.push(newPost)
-            // state.newPostValue = '';
-            return {...state,posts:[...state.posts,newPost],newPostValue:""}
-        case 'ADD-NEW-TEXT':
-            let newPostInputvalue = action.newText
-            return {...state,newPostValue:newPostInputvalue};
+
+            return {...state,posts:[...state.posts,newPost]}
+
         case 'SET-USER-PROFILE':
             return {...state,profile: action.profile};
         case 'SET-STATUS':
@@ -67,24 +62,19 @@ const ProfileReduser = (state:ProfileReduserStateType = initialState, action:Mai
             return state
     }
 };
-type MainProfileActionType = addPostACType | addNewTextACType | setUserProfileType | GetStatusType
+type MainProfileActionType = addPostACType | setUserProfileType | GetStatusType
 type addPostACType = ReturnType<typeof addPostActionCreator>
-type addNewTextACType = ReturnType<typeof addNewTextActionCreator>
 type setUserProfileType = ReturnType<typeof setUserProfile>
 type GetStatusType = ReturnType<typeof GetStatus>
 
-export const addPostActionCreator = () => {
+export const addPostActionCreator = (postBody: string) => {
 
     return {
-        type: 'ADD-POST'
+        type: 'ADD-POST',
+        postBody
     } as const
 }
-export const addNewTextActionCreator = (text: string) => {
-    return {
-        type: 'ADD-NEW-TEXT',
-        newText: text
-    } as const
-}
+
 export const setUserProfile = (profile: ProfileType) => {
     return {
         type: 'SET-USER-PROFILE',
