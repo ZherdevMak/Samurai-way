@@ -22,7 +22,6 @@ export const AuthReduser = (state: AuthReduserStateType = initialState, action: 
             return {
                 ...state,
                 ...action.data,
-                isAuth: true
             }
         default:
             return state
@@ -34,10 +33,10 @@ export const AuthReduser = (state: AuthReduserStateType = initialState, action: 
 export type SetUserDataACType = ReturnType<typeof SetUserDataAC>
 
 
-export const SetUserDataAC = (id: number | null, email: string | null, login: string | null) => {
+export const SetUserDataAC = (id: number | null, email: string | null, login: string | null, isAuth:boolean) => {
     return {
         type: SET_USER_DATA,
-        data: {id, email, login}
+        data: {id, email, login,isAuth}
     } as const
 }
 export const getAuthDataThunk = () =>
@@ -45,7 +44,23 @@ export const getAuthDataThunk = () =>
         authAPI.me().then(response => {
             if (response.data.resultCode === 0) {
                 let {id, email, login} = response.data.data
-                dispatch(SetUserDataAC(id, email, login))
+                dispatch(SetUserDataAC(id, email, login, true))
             }
         })
     }
+export const loginTC = (email:string, password:string, rememberMe:boolean) =>
+    (dispatch: any) => {
+        authAPI.login(email,password,rememberMe).then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch(getAuthDataThunk())
+            }
+        })
+    }
+export const logoutTC = () =>
+    (dispatch: any) => {
+        authAPI.logout().then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch((SetUserDataAC(null, null, null, false))
+
+        )}
+    })}

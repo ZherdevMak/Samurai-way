@@ -1,13 +1,24 @@
 import React from 'react';
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import {TextArea} from "../Common/FormsControls/Textarea";
+import {maxLengthCreator, requiredField} from "../../Utils/Validators/Validators";
+import {connect} from "react-redux";
+import {loginTC} from "../Redux/Auth-reducer";
+import {Redirect} from "react-router-dom";
+import {AppStateType} from "../Redux/ReduxStore";
 
 type FormDataType = {
-    Login:string
+    email:string
     Password:string
-    checkbox:boolean
+    rememberMe:boolean
 }
-const Login = () => {
+const maxLength10 =  maxLengthCreator(30)
+const Login = (props:any) => {
     const onSubmitFinction = (formData:FormDataType) => {
+        props.loginTC(formData.email,formData.Password,formData.rememberMe)
+    }
+    if (props.isAuth) {
+        return <Redirect to={'/profile'}/>
     }
     return (
         <div>
@@ -15,20 +26,26 @@ const Login = () => {
             <LoginReduxForm onSubmit={onSubmitFinction}/>
         </div>
     );
+
 };
-export default Login
+const mapStateToProps = (state:AppStateType) => ({
+    isAuth: state.auth.isAuth
+})
+export default connect(mapStateToProps, {loginTC} ) (Login)
 
 export const LoginForm :React.FC<InjectedFormProps<FormDataType>> = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field placeholder={'Login'} name={'Login'} component={'input'}/>
+                <Field placeholder={'Login'} name={'email'} component={TextArea} types={'input'}
+                       validate={[requiredField,maxLength10]}/>
             </div>
             <div>
-                <Field placeholder={'Password'} name={'Password'} component={'input'}/>
+                <Field placeholder={'Password'} name={'Password'} component={TextArea} types={'input'}
+                       validate={[requiredField,maxLength10]}/>
             </div>
             <div>
-                <Field type={'checkbox'} name={'checkbox'} component={'input'}/> remember me
+                <Field type={'checkbox'} name={'rememberMe'} component={'input'}/> remember me
             </div>
             <div>
                 <button>Login</button>
