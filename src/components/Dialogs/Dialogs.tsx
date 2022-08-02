@@ -5,7 +5,7 @@ import Item from "./DialogsItem/DialogsItem";
 import Message from "./Message/Message";
 import {DialogPropsType} from "./DialogsContainer";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {TextArea} from "../Common/FormsControls/Textarea";
+import {Input} from "../Common/FormsControls/Textarea";
 import {maxLengthCreator, requiredField} from "../../Utils/Validators/Validators";
 
 export type messageProps = {
@@ -60,7 +60,7 @@ export const AddMessageForm :React.FC<InjectedFormProps<FormDataType>> = (props)
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field placeholder={'Message'} name={'messageBody'} component={TextArea} types={'input'} validate={[requiredField,maxLength10]}/>
+                <Field placeholder={'Message'} name={'messageBody'} component={Input} types={'input'} validate={[requiredField,maxLength10]}/>
             </div>
             <button>Add Post</button>
         </form>
