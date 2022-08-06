@@ -7,7 +7,7 @@ export type NavBarProps = {
     store: any
 }
 
-function NavBar(props: NavBarProps) {
+function NavBar() {
 
     return (
         <div className={clAss.nav}>
@@ -29,7 +29,7 @@ function NavBar(props: NavBarProps) {
             <li className={clAss.item}>
                 <NavLink to='/Settings' activeClassName={clAss.activeLink}>Settings</NavLink>
             </li>
-            <FriendsContainer store={props.store}/>
+            <FriendsContainer />
         </div>
     )
 }

@@ -39,6 +39,7 @@ type CommonPropsType = RouteComponentProps<PathParamsType> & ProfileContainerPro
 class ProfileContainer extends React.Component<CommonPropsType> {
     componentDidMount() {
         let userId = this.props.match.params.userId
+
         this.props.getUserProfile(userId)
         this.props.getStatus(userId)
     }

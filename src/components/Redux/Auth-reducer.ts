@@ -1,5 +1,6 @@
 import {authAPI} from "../../Api/Api";
 import {stopSubmit} from "redux-form";
+import {Dispatch} from "redux";
 
 
 export type AuthReduserStateType = {
@@ -41,8 +42,8 @@ export const SetUserDataAC = (id: number | null, email: string | null, login: st
     } as const
 }
 export const getAuthDataThunk = () =>
-    (dispatch: any) => {
-        authAPI.me().then(response => {
+    (dispatch: Dispatch ) => {
+        return authAPI.me().then(response => {
             if (response.data.resultCode === 0) {
                 let {id, email, login} = response.data.data
                 dispatch(SetUserDataAC(id, email, login, true))
@@ -50,7 +51,7 @@ export const getAuthDataThunk = () =>
         })
     }
 export const loginTC = (email:string, password:string, rememberMe:boolean) =>
-    (dispatch: any) => {
+    (dispatch:any) => {
         authAPI.login(email,password,rememberMe).then(response => {
             if (response.data.resultCode === 0) {
                 dispatch(getAuthDataThunk())
@@ -61,7 +62,7 @@ export const loginTC = (email:string, password:string, rememberMe:boolean) =>
         })
     }
 export const logoutTC = () =>
-    (dispatch: any) => {
+    (dispatch: Dispatch) => {
         authAPI.logout().then(response => {
             if (response.data.resultCode === 0) {
                 dispatch((SetUserDataAC(null, null, null, false))

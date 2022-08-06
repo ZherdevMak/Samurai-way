@@ -1,12 +1,12 @@
 import React from 'react';
-import {NavBarProps} from "../Nav";
 import Friends from "./Friends";
-import {StateType} from "../../Redux/State";
+import {useSelector} from "react-redux";
+import {AppStateType} from "../../Redux/ReduxStore";
 
-const FriendsContainer = (props: NavBarProps) => {
-    let state: StateType = props.store.getState()
+const FriendsContainer = () => {
+    let state = useSelector<AppStateType,any>(state=>state.sidebar)
 
-    return <Friends friends={state.sidebar} />
+    return <Friends friends={state} />
 };
 
 export default FriendsContainer;

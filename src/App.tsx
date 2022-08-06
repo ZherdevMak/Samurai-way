@@ -10,6 +10,10 @@ import {UsersContainer} from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
+import {connect} from "react-redux";
+import {initialiseThunk} from "./components/Redux/AppReducer";
+import {AppStateType} from "./components/Redux/ReduxStore";
+import Preloader from "./components/Common/Preloader";
 
 
 export type AppPropsType = {
@@ -17,29 +21,39 @@ export type AppPropsType = {
     store: any
 }
 
-function App(props: AppPropsType) {
+class App extends React.Component<any> {
+    componentDidMount() {
+        this.props.initialiseThunk()
+    }
 
-    return (
-        <BrowserRouter>
-            <div className="app-wrapper">
-                <HeaderContainer/>
-                <NavBar store={props.store}/>
-                <div className="dialog_content">
-                    <Route exact path='/Dialogs'
-                           render={() => <DialogsContainer />}/>
-                    <Route exact path='/Users'
-                           render={() => <UsersContainer/>}/>
-                    <Route exact path='/Login'
-                           render={() => <Login />}/>
-                    <Route path='/Profile/:userId?' render={() => <ProfileContainer />}/>
-                    <Route path='/News' render={() => <News/>}/>
-                    <Route path='/Music' render={() => <Music/>}/>
-                    <Route path='/Settings' render={() => <Settings/>}/>
-                </div>
-            </div>
-        </BrowserRouter>
-    )
+    render() {
+        if (!this.props.initialised) {
+            return <Preloader/>
+        } else {
+            return (
+                <BrowserRouter>
+                    <div className="app-wrapper">
+                        <HeaderContainer/>
+                        <NavBar/>
+                        <div className="dialog_content">
+                            <Route exact path='/Dialogs'
+                                   render={() => <DialogsContainer/>}/>
+                            <Route exact path='/Users'
+                                   render={() => <UsersContainer/>}/>
+                            <Route exact path='/Login'
+                                   render={() => <Login/>}/>
+                            <Route path='/Profile/:userId?' render={() => <ProfileContainer/>}/>
+                            <Route path='/News' render={() => <News/>}/>
+                            <Route path='/Music' render={() => <Music/>}/>
+                            <Route path='/Settings' render={() => <Settings/>}/>
+                        </div>
+                    </div>
+                </BrowserRouter>)
+        }
+    }
 }
 
-
-export default App;
+const MapStateToProps = (state: AppStateType) => ({
+    initialised: state.app.initialised
+})
+export default connect(MapStateToProps, {initialiseThunk})(App);
