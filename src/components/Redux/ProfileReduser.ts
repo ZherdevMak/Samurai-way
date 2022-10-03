@@ -58,14 +58,17 @@ const ProfileReduser = (state:ProfileReduserStateType = initialState, action:Mai
             return {...state,profile: action.profile};
         case 'SET-STATUS':
             return {...state,status: action.status};
+        case "DELETE-POST":
+            return {...state,posts: state.posts.filter(i => i.id != action.id)};
         default:
             return state
     }
 };
-type MainProfileActionType = addPostACType | setUserProfileType | GetStatusType
+type MainProfileActionType = addPostACType | setUserProfileType | GetStatusType | deletePostType
 type addPostACType = ReturnType<typeof addPostActionCreator>
 type setUserProfileType = ReturnType<typeof setUserProfile>
 type GetStatusType = ReturnType<typeof GetStatus>
+type deletePostType = ReturnType<typeof deletePost>
 
 export const addPostActionCreator = (postBody: string) => {
 
@@ -79,6 +82,12 @@ export const setUserProfile = (profile: ProfileType) => {
     return {
         type: 'SET-USER-PROFILE',
         profile: profile
+    } as const
+}
+export const deletePost = (id: number) => {
+    return {
+        type: 'DELETE-POST',
+        id
     } as const
 }
 export const GetStatus = (status: string) => {
@@ -106,4 +115,5 @@ export const updateStatus = (status: any) =>
             dispatch(GetStatus(status))
         })
     }
+
 export default ProfileReduser;
