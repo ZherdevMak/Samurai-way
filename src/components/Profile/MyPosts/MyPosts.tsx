@@ -24,8 +24,8 @@ export type FormDataType = {
     'newPostText': string
 }
 function MyPosts(props: MyPostsPropsType) {
+    console.log("render")
     const addPost = (values:FormDataType) => {
-        debugger
         props.addPost(values.newPostText)
     }
     const posts = props.posts.map((p) => <Post key={v1()} message={p.message} likesCount={p.likesCount} id={p.id}/>)
