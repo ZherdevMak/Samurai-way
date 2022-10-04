@@ -27,11 +27,10 @@ export function Dialogs(props: DialogPropsType) {
     }
 
     const dialogs = props.dialogs.dialogs.map((d) => {
-        return (
-            <div key={v1()}>
+        return <div key={v1()}>
                 <div><Item name={d.name} id={d.id}/></div>
             </div>
-        )
+
     })
 
     const addMessage = props.dialogs.messages.map((m: { message: string; }) => {

@@ -1,4 +1,5 @@
 import {usersAPI} from "../../Api/Api";
+import {AppDispatch, AppThunk} from "./ReduxStore";
 
 export type UserPhotos = {
     small: string | null
@@ -137,30 +138,27 @@ export const toggleIsFollowing = (isFollowing: boolean, userID: string) => {
     } as const
 }
 
-export const getUsersThunkCreator = (currentPage:number, pageSize:number) => {
-    return (dispatch:any) => {
+export const getUsersThunkCreator = (currentPage:number, pageSize:number):AppThunk => {
+    return async (dispatch:AppDispatch) => {
         dispatch(toggleIsFetching(true))
-        usersAPI.getUsers(currentPage, pageSize).then(data => {
+        let data = await usersAPI.getUsers(currentPage, pageSize)
             dispatch(toggleIsFetching(false))
             dispatch(setUsers(data.items))
             dispatch(setTotalUsersCount(data.totalCount))
-        })
     }
 }
-export const followThunkCreator = (userID:string) =>{
-    return (dispach:any) => {
+export const followThunkCreator = (userID:string): AppThunk =>{
+    return async (dispach:AppDispatch) => {
         dispach(toggleIsFollowing(true,userID))
-        usersAPI.follow(userID)
-            .then(response => {
+        let response = await usersAPI.follow(userID)
                 if (response.data.resultCode === 0) {
                     dispach(follow(userID))
                 }
                 dispach(toggleIsFollowing(false,userID))
-            })
     }
 }
-export const unfollowThunkCreator = (userID:string) =>{
-    return (dispach:any) => {
+export const unfollowThunkCreator = (userID:string):AppThunk =>{
+    return (dispach:AppDispatch) => {
         dispach(toggleIsFollowing(true,userID))
         usersAPI.unfollow(userID)
             .then(response => {

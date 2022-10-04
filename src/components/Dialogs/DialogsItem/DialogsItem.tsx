@@ -10,8 +10,7 @@ type itemProps = {
 
 
 function Item(props: itemProps) {
-    return (
-        <div key={v1()} className={comp.item + ' ' + comp.active}>
+    return (<div key={v1()} className={comp.item + ' ' + comp.active}>
             <NavLink to={'/Dialogs/1' + props.id}>{props.name}</NavLink>
         </div>
     )

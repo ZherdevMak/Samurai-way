@@ -1,6 +1,7 @@
 import {ArreyPostType} from "./State";
 import {ProfileType} from "../Profile/ProfileContainer";
 import {profileAPI, usersAPI} from "../../Api/Api";
+import {AppDispatch, AppThunk} from "./ReduxStore";
 
 export type ProfileReduserStateType = {
     posts: ArreyPostType[],
@@ -96,11 +97,10 @@ export const GetStatus = (status: string) => {
         status: status
     } as const
 }
-export const getUserProfile = (userID: string) =>
-    (dispatch: any) => {
-        usersAPI.getProfile(userID).then(response => {
+export const getUserProfile = (userID: string): AppThunk =>
+    async (dispatch: AppDispatch) => {
+        let response = await usersAPI.getProfile(userID)
             dispatch(setUserProfile(response.data))
-        })
     }
 export const getStatus = (userID: string) =>
     (dispatch: any) => {
@@ -108,12 +108,11 @@ export const getStatus = (userID: string) =>
             dispatch(GetStatus(response.data))
         })
     }
-export const updateStatus = (status: any) =>
-    (dispatch: any) => {
-        profileAPI.updateStatus(status).then(response => {
+export const updateStatus = (status: any): AppThunk =>
+    async (dispatch: AppDispatch) => {
+        const response = await profileAPI.updateStatus(status)
             if (response.data.resultCode === 0)
             dispatch(GetStatus(status))
-        })
     }
 
 export default ProfileReduser;
