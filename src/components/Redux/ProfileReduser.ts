@@ -64,7 +64,7 @@ const ProfileReduser = (state:ProfileReduserStateType = initialState, action:Mai
             return state
     }
 };
-type MainProfileActionType = addPostACType | setUserProfileType | GetStatusType | deletePostType
+export type MainProfileActionType = addPostACType | setUserProfileType | GetStatusType | deletePostType
 type addPostACType = ReturnType<typeof addPostActionCreator>
 type setUserProfileType = ReturnType<typeof setUserProfile>
 type GetStatusType = ReturnType<typeof GetStatus>

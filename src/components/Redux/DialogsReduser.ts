@@ -37,7 +37,7 @@ const DialogsReduser = (state: DialogsReduserStateType = initialState,action:Mai
             return state
     }
 };
-type MainDialogActionType = addNewMessageACType
+export type MainDialogActionType = addNewMessageACType
 type addNewMessageACType = ReturnType<typeof addNewMessageCreator>
 export const addNewMessageCreator = (messageBody:string) => {
     return {

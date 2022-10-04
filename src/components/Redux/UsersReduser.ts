@@ -82,7 +82,7 @@ const UsersReduser = (state = initialState, action: MainUsersActionType): UsersR
             return state
     }
 };
-type MainUsersActionType = followACType | unfollowACType | setUsersACType |
+export type MainUsersActionType = followACType | unfollowACType | setUsersACType |
     setCurrentPageACType | setTotalUsersCountACType | toggleIsFetchingACType | toggleIsFollowingACType
 type followACType = ReturnType<typeof follow>
 type unfollowACType = ReturnType<typeof unfollow>

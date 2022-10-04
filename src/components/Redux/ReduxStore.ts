@@ -1,15 +1,14 @@
 import {applyMiddleware, combineReducers, legacy_createStore} from "redux";
-import ProfileReduser from "./ProfileReduser";
-import DialogsReduser from "./DialogsReduser";
+import ProfileReduser, {MainProfileActionType} from "./ProfileReduser";
+import DialogsReduser, {MainDialogActionType} from "./DialogsReduser";
 import SidebarReduser from "./SidebarReduser";
-import UsersReduser from "./UsersReduser";
-import {AuthReduser} from "./Auth-reducer";
-import thunkMiddleware from "redux-thunk"
+import UsersReduser, {MainUsersActionType} from "./UsersReduser";
+import {AuthReduser, SetUserDataACType} from "./Auth-reducer";
+import thunkMiddleware, {ThunkAction, ThunkDispatch} from "redux-thunk"
 import {reducer as formReducer} from 'redux-form'
-import {AppReduser} from "./AppReducer";
+import {AppReduser, SetInitialisedACType} from "./AppReducer";
 
 
-export type stateType = ReturnType<typeof store.getState>
 let redusers = combineReducers({
     profile: ProfileReduser,
     dialogs: DialogsReduser,
@@ -20,8 +19,13 @@ let redusers = combineReducers({
     app:AppReduser
 })
 let store = legacy_createStore(redusers, applyMiddleware(thunkMiddleware))
+export type AppActionsType = MainProfileActionType | MainDialogActionType | MainUsersActionType |
+  SetUserDataACType | SetInitialisedACType
+export type AppStateType = ReturnType<typeof store.getState>
+export type AppDispatch = ThunkDispatch<AppStateType, unknown, AppActionsType>
+export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, AppStateType, unknown, AppActionsType>
 // @ts-ignore
 
 window.store = store
-export type AppStateType = ReturnType<typeof redusers>
+
 export default store
