@@ -35,7 +35,6 @@ const mapStateToProps = (state: AppStateType) => ({
 export default connect(mapStateToProps, {loginTC})(Login)
 
 export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
-    debugger
     return (
         <form onSubmit={props.handleSubmit}>
             <div>

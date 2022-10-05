@@ -1,4 +1,4 @@
-import {applyMiddleware, combineReducers, legacy_createStore} from "redux";
+import {applyMiddleware, combineReducers, compose, legacy_createStore} from "redux";
 import ProfileReduser, {MainProfileActionType} from "./ProfileReduser";
 import DialogsReduser, {MainDialogActionType} from "./DialogsReduser";
 import SidebarReduser from "./SidebarReduser";
@@ -18,7 +18,10 @@ let redusers = combineReducers({
     form:formReducer,
     app:AppReduser
 })
-let store = legacy_createStore(redusers, applyMiddleware(thunkMiddleware))
+// @ts-ignore
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+let store = legacy_createStore(redusers, composeEnhancers (applyMiddleware(thunkMiddleware)))
 export type AppActionsType = MainProfileActionType | MainDialogActionType | MainUsersActionType |
   SetUserDataACType | SetInitialisedACType
 export type AppStateType = ReturnType<typeof store.getState>
