@@ -14,7 +14,8 @@ import {connect, Provider} from "react-redux";
 import {initialiseThunk} from "./components/Redux/AppReducer";
 import store, {AppStateType} from "./components/Redux/ReduxStore";
 import Preloader from "./components/Common/Preloader";
-
+// const DialogsContainer = React.lazy(() => import ("./components/Dialogs/DialogsContainer"))
+// const ProfileContainer = React.lazy(() => import ("./components/Profile/ProfileContainer"))
 
 export type AppPropsType = {
 

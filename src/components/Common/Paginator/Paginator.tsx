@@ -10,7 +10,6 @@ type PaginatorPropsType = {
 
 
 const Paginator = (props:PaginatorPropsType) => {
-  debugger
   const usersState = useAppSelector((state) => state.users)
 
   let pagesCount = Math.ceil(usersState.totalUsersCount / usersState.pageSize)
@@ -41,6 +40,6 @@ const Paginator = (props:PaginatorPropsType) => {
           <button onClick={() => setCurrentPagePeriod(currentPagePeriod + 1)}>Next</button>}
     </div>
   );
-};
+}
 
 export default Paginator;
