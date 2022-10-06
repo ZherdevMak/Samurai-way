@@ -28,14 +28,7 @@ const Users = (props: UserPropsType1) => {
     return (
         <div>
             <div>
-                <Paginator onPageChanged ={props.onPageChanged}/>
-                {/*{pages.map(el => {*/}
-
-                {/*    return <span key={v1()} className={(props.currentPage === el) ? stl.selected : ''}*/}
-                {/*                 onClick={() => {*/}
-                {/*                     props.onPageChanged(el)*/}
-                {/*                 }}>{` ${el} `}</span>*/}
-                {/*})}*/}
+                <Paginator onPageChanged ={props.onPageChanged} periodSize={10}/>
             </div>
             {props.users.map(el => {
                 return <div key={v1()}>

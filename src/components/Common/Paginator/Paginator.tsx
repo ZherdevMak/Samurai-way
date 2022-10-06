@@ -5,17 +5,19 @@ import stl from "./Paginator.module.css";
 
 type PaginatorPropsType = {
   onPageChanged: (el: number) => void
+  periodSize: number
 }
 
 
 const Paginator = (props:PaginatorPropsType) => {
+  debugger
   const usersState = useAppSelector((state) => state.users)
 
   let pagesCount = Math.ceil(usersState.totalUsersCount / usersState.pageSize)
-  let pagePeriod = pagesCount/10
+  let pagePeriod = Math.ceil(pagesCount/props.periodSize)
   let [currentPagePeriod,setCurrentPagePeriod] = useState<number>(1)
-  let previosPagePeriodCount = (currentPagePeriod - 1) * pagePeriod
-  let nextPagePeriodCount = (currentPagePeriod) * pagePeriod
+  let previosPagePeriodCount = (currentPagePeriod - 1) * props.periodSize
+  let nextPagePeriodCount = (currentPagePeriod) * props.periodSize
   let pages = [] as number[]
   for (let i = 1; i <= pagesCount; i++) {
     pages.push(i)
@@ -23,7 +25,8 @@ const Paginator = (props:PaginatorPropsType) => {
 
   return(
     <div>
-      <button></button>
+      { currentPagePeriod > 1 &&
+          <button onClick={() => setCurrentPagePeriod(currentPagePeriod - 1)}>Prev</button>}
       {pages
         .filter(p => p >= previosPagePeriodCount && p <= nextPagePeriodCount)
         .map(el => {
@@ -34,7 +37,8 @@ const Paginator = (props:PaginatorPropsType) => {
                        }}>{` ${el} `}</span>
         })
       }
-
+      { pagePeriod > currentPagePeriod &&
+          <button onClick={() => setCurrentPagePeriod(currentPagePeriod + 1)}>Next</button>}
     </div>
   );
 };
