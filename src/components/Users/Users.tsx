@@ -4,8 +4,9 @@ import stl from "./users.module.css";
 import userAvatar from "../../assets/images/avatar.jpg";
 import {UsersStateType} from "../Redux/UsersReduser";
 import {NavLink} from "react-router-dom";
+import Paginator from "../Common/Paginator/Paginator";
 
-type UserPropsType1 = {
+export type UserPropsType1 = {
     users: Array<UsersStateType>,
     pageSize: number
     totalUsersCount: number,
@@ -27,13 +28,14 @@ const Users = (props: UserPropsType1) => {
     return (
         <div>
             <div>
-                {pages.map(el => {
+                <Paginator onPageChanged ={props.onPageChanged}/>
+                {/*{pages.map(el => {*/}
 
-                    return <span key={v1()} className={(props.currentPage === el) ? stl.selected : ''}
-                                 onClick={() => {
-                                     props.onPageChanged(el)
-                                 }}>{` ${el} `}</span>
-                })}
+                {/*    return <span key={v1()} className={(props.currentPage === el) ? stl.selected : ''}*/}
+                {/*                 onClick={() => {*/}
+                {/*                     props.onPageChanged(el)*/}
+                {/*                 }}>{` ${el} `}</span>*/}
+                {/*})}*/}
             </div>
             {props.users.map(el => {
                 return <div key={v1()}>

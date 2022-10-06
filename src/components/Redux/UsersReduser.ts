@@ -37,7 +37,7 @@ let initialState: UsersReduserStateType = {
     users: [],
     pageSize: 100,
     totalUsersCount: 0,
-    currentPage: 198,
+    currentPage: 3,
     isFetching: false,
     followingInProgress: []
 }
@@ -112,6 +112,7 @@ export const setUsers = (users: UsersStateType[]) => {
     } as const
 }
 export const setCurrentPage = (currentPage: number) => {
+    debugger
     return {
         type: SET_CURRENT_PAGE,
         currentPage
