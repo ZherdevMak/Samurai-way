@@ -2,7 +2,7 @@ import React from "react";
 import comp from './ProfileInfo.module.css'
 import ProfileStatus from "./ProfileStatus";
 import {ProfileType} from "./ProfileContainer";
-
+import avatar from '../../assets/images/avatar.jpg'
 export type ProfileInfoType = {
     profile: ProfileType,
     status: string,
@@ -14,7 +14,7 @@ function ProfileInfo(props:ProfileInfoType) {
          <div>
             <img src='https://html5css.ru/css/img_forest.jpg' alt={'picture'}></img>
             <article className={comp.discriptionBlock}>
-                <img src={props.profile.photos?.large} alt="profile"/>
+                <img src={props.profile.photos?.large || avatar} alt="profile"/>
                 <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
                 <div>About me {props.profile.aboutMe}</div>
                 <div>Contacts: {props.profile.fullName}</div>
